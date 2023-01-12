@@ -1,0 +1,23 @@
+.profile__info {
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  display: grid;
+  /*align-items: center;*/
+  grid-template-areas:
+    "login edit"
+    "activity .";
+    margin-left: 30px;
+    margin-top: 22px;
+    margin-bottom: 25px;
+    
+    row-gap: 8px;
+    column-gap: 18px;
+  
+   /*login">Жак-Ив Кусто</h1>
+   <p class="profile__activity">Исследователь океана</p>
+   <button class="profile__edit" */
+
+  /*justify-self: end;
+  align-self: center;*/
+}
