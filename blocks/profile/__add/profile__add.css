@@ -11,5 +11,13 @@
   border-style: solid;
   border-color: #fff;
   justify-self: end;
-  align-self: center;
+  margin-top: 34px;
+  /*align-self: center;*/
 }
+
+@media screen and (max-width: 800px) {
+  .profile__add {
+    width: 100px;
+  }
+}
+

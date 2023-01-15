@@ -2,8 +2,11 @@
   background: url(../../../images/button-like.svg);
   width: 22px;
   height: 19px;
+  background-repeat: no-repeat;
+
   margin: 0;
   padding: 0;
   border: 0;
-  
+  margin-top: 29px;
+  grid-area: button;
 }

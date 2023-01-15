@@ -8,3 +8,11 @@
   grid-area: login;
   align-self: end;
 }
+
+@media screen and (max-width: 800px) {
+  .profile__login {
+  
+    font-size: 27px;
+    line-height: 33px;
+  }
+}

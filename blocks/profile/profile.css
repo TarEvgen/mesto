@@ -8,3 +8,9 @@
   margin-right: auto;
   max-width: 880px;
 }
+
+@media screen and (max-width: 1024px) {
+  .profile {
+    max-width: calc(100% - 120px);
+  }
+}

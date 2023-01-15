@@ -21,3 +21,12 @@
   /*justify-self: end;
   align-self: center;*/
 }
+
+@media screen and (max-width: 800px) {
+  .profile__info {
+  
+    font-size: 27px;
+    line-height: 33px;
+    grid-template-columns: max-content max-content;
+  }
+}
