@@ -10,6 +10,7 @@
     margin-left: 30px;
     margin-top: 22px;
     margin-bottom: 25px;
+    grid-template-columns: repeat(2, max-content);
     
     row-gap: 8px;
     column-gap: 18px;
@@ -27,6 +28,24 @@
   
     font-size: 27px;
     line-height: 33px;
-    grid-template-columns: max-content max-content;
+    
   }
 }
+
+@media screen and (max-width: 620px) {
+  .profile__info {
+    
+    margin-left: 30px;
+    margin-top: 26px;
+    margin-bottom: 33px;
+    row-gap: 8px;
+    column-gap: 10px;
+    justify-self: center;
+    
+
+
+   
+  }
+}
+
+

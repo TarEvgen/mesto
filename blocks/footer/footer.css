@@ -1,24 +1,27 @@
-.elements {
+.footer {
   margin: 0;
   padding: 0;
-  margin-top: 46px;
+  margin-top: 66px;
+  margin-bottom: 60px;
+  max-width: 880px;
   margin-left: auto;
   margin-right: auto;
-  max-width: 880px;
 }
 
 @media screen and (max-width: 1024px) {
-    .elements {
+    .footer {
       max-width: calc(100% - 120px);
     }
   }
-
+  
   @media screen and (max-width: 620px) {
-    .elements {
-      
-
+    .footer {
+   
       max-width: calc(100% - 38px);
-      margin-top: 36px;
+      margin-top: 48px;
+      margin-bottom: 36px;
+  
+  
      
     }
   }

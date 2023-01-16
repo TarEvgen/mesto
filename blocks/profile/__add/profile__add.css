@@ -1,6 +1,6 @@
 .profile__add {
   padding: 0;
-  width: 150px;
+  width: 100%;
   height: 50px;
   background: url(../../../images/profile-add.svg);
   background-position: center;
@@ -13,11 +13,18 @@
   justify-self: end;
   margin-top: 34px;
   /*align-self: center;*/
+  transition: opacity .7s;
 }
 
-@media screen and (max-width: 800px) {
+.profile__add:hover {
+  opacity: .6;
+}
+
+@media screen and (max-width: 620px) {
   .profile__add {
-    width: 100px;
+    
+    margin: 0;
+    background-size: 16px;
+    
   }
 }
-
