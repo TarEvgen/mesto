@@ -5,14 +5,11 @@
   background: url(../../../images/profile-add.svg);
   background-position: center;
   background-repeat: no-repeat;
-
   border-width: 1px;
-  
   border-style: solid;
   border-color: #fff;
   justify-self: end;
   margin-top: 34px;
-  /*align-self: center;*/
   transition: opacity .7s;
 }
 
@@ -22,9 +19,7 @@
 
 @media screen and (max-width: 620px) {
   .profile__add {
-    
     margin: 0;
     background-size: 16px;
-    
   }
 }

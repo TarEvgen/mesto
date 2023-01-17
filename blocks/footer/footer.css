@@ -9,19 +9,15 @@
 }
 
 @media screen and (max-width: 1024px) {
-    .footer {
-      max-width: calc(100% - 120px);
-    }
+  .footer {
+    max-width: calc(100% - 120px);
   }
-  
-  @media screen and (max-width: 620px) {
-    .footer {
-   
-      max-width: calc(100% - 38px);
-      margin-top: 48px;
-      margin-bottom: 36px;
-  
-  
-     
-    }
+}
+
+@media screen and (max-width: 620px) {
+  .footer {
+    max-width: calc(100% - 38px);
+    margin-top: 48px;
+    margin-bottom: 36px;
   }
+}

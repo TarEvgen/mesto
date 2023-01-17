@@ -1,17 +1,10 @@
 .element {
-  
   max-width: 100%;
   background-color: #fff;
   list-style-type: none;
   display: grid;
-  /*grid-template-rows:  1fr ;*/
   grid-template-columns: auto 44px;
-  /*grid-template-rows: auto ;*/
-  
   border-radius: 10px;
-  
-
-  grid-template-areas:
-  "img img"
-  "title button";
+  grid-template-areas: "img img"
+                       "title button";
 }
