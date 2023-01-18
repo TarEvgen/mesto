@@ -4,8 +4,9 @@ const popupBtnClose = document.querySelector(".popup__close");
 const popupLogin = document.querySelector(".profile__login");
 const popupAtivity = document.querySelector(".profile__activity");
 
-popupBtnClose.addEventListener("click", closePopup);
-popupBtnOpen.addEventListener("click", openPopup);
+let formElement = document.querySelector(".popup__form");
+let nameInput = document.querySelector(".popup__user_type_name");
+let jobInput = document.querySelector(".popup__user_type_data"); 
 
 function openPopup() {
   popupForm.classList.add("popup_opened");  
@@ -17,10 +18,6 @@ function closePopup() {
   popupForm.classList.remove("popup_opened");  
 }
 
-let formElement = document.querySelector(".popup__user-data");
-let nameInput = document.querySelector(".popup__user");
-let jobInput = document.querySelector(".popup__data"); 
-
 function handleFormSubmit (evt) {
   evt.preventDefault(); 
   popupLogin.textContent = nameInput.value;
@@ -29,6 +26,8 @@ function handleFormSubmit (evt) {
   closePopup();  
 }
 
+popupBtnClose.addEventListener("click", closePopup);
+popupBtnOpen.addEventListener("click", openPopup);
 formElement.addEventListener ('submit', handleFormSubmit);
 
 

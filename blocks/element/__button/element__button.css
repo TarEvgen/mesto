@@ -9,8 +9,9 @@
   margin-top: 29px;
   grid-area: button;
   transition: opacity .7s;
+  cursor: pointer;
 }
 
 .element__button:hover {
-  opacity: .6;
+  opacity: .5;
 }

@@ -11,6 +11,8 @@
   justify-self: end;
   margin-top: 34px;
   transition: opacity .7s;
+  cursor: pointer;
+  border-radius: 2px;
 }
 
 .profile__add:hover {
