@@ -3,5 +3,5 @@
   grid-area: img;
   border-radius: 10px 10px 0 0;
   object-fit: cover;
-  max-height: 282px;
+  min-height: 282px;
 }
