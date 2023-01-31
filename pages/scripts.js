@@ -3,16 +3,12 @@ const popupBtnOpen = document.querySelector(".profile__edit");
 const popup2BtnOpen = document.querySelector(".profile__add");
 
 
-
-
-
-
 const popupFormProfile = document.querySelector(".popup_edit-profile");
 
 const popupFormAddCards = document.querySelector(".popup_add-cards");
 
-const popupBtnClose = document.querySelector(".popup__close");
-
+const popupBtnClose = document.querySelector(".popup__close_edit-profile");
+const popup2BtnClose = document.querySelector(".popup__close_add-cards");
 
 const popupLogin = document.querySelector(".profile__login");
 const popupAtivity = document.querySelector(".profile__activity");
@@ -20,6 +16,20 @@ const popupAtivity = document.querySelector(".profile__activity");
 let formElement = document.querySelector(".popup__form");
 let nameInput = document.querySelector(".popup__input_type_name");
 let jobInput = document.querySelector(".popup__input_type_data"); 
+
+
+const template = document
+  .querySelector('.card')
+  .content.querySelector('.element');
+
+
+const elementsList = document.querySelector('.elements__list');
+
+const inputTitle = document.querySelector('.popup__input_type_title');
+
+const inputLink = document.querySelector('.popup__input_type_link');
+//добавить переменную полей ввода 
+const btnSaveCreate = document.querySelector('.popup__save_create');
 
 
 const initialCards = [
@@ -49,20 +59,11 @@ const initialCards = [
   }
 ];
 
-const template = document
-  .querySelector('.card')
-  .content.querySelector('.element');
-
-
-const elements__list = document.querySelector('.elements__list');
-
-// добавить сабмит для кнопки в модалке 
-//добавить переменную полей ввода 
 
 
 function renderCards() {
 
-  const cards = initialCards.map((name, link) =>{
+  const cards = initialCards.map((name, link) => {
 
     const cardElement = template.cloneNode(true);
     cardElement.querySelector('.element__title').textContent = name.name;
@@ -72,7 +73,7 @@ function renderCards() {
     return cardElement;
     //elements__list.append(cardElement)
   });
-  elements__list.append(...cards); 
+  elementsList.append(...cards); 
 }
 
 
@@ -91,10 +92,10 @@ function openPopup(openPopupForm) {
 
 }
 
-function closePopup() {
+function closePopup(close) {
   
 
-  popupFormProfile.classList.remove("popup_opened");
+  close.classList.remove("popup_opened");
  
 }
 
@@ -102,8 +103,7 @@ function handleFormSubmit (evt) {
   evt.preventDefault(); 
   popupLogin.textContent = nameInput.value;
   popupAtivity.textContent = jobInput.value;
-
-  closePopup(close);  
+  closePopup(popupFormProfile)  
 }
 
 
@@ -118,9 +118,12 @@ function handleFormSubmit (evt) {
 //console.log(popupFormAddCards)
 //console.log(popupFormAddCards)
 
-popupBtnClose.addEventListener("click", closePopup);
-//popupBtnClose.addEventListener("click", () => closePopup (popupFormAddCards));
+popupBtnClose.addEventListener("click", () => closePopup(popupFormProfile));
 
+popup2BtnClose.addEventListener("click", () => closePopup(popupFormAddCards));
+
+//popupBtnClose.addEventListener("click", () => closePopup (popupFormAddCards));
+//popupB tnClose.addEventListener("click", closePopup);
 
 
 popupBtnOpen.addEventListener("click", () => openPopup(popupFormProfile));
@@ -128,6 +131,29 @@ popupBtnOpen.addEventListener("click", () => openPopup(popupFormProfile));
 popup2BtnOpen.addEventListener("click", () => openPopup(popupFormAddCards));
 
 formElement.addEventListener ('submit', handleFormSubmit);
+
+
+
+btnSaveCreate.addEventListener('click', (evt) => {
+
+  evt.preventDefault();
+  const titlegg = inputTitle.value;
+  const fgg = inputLink.value;
+
+  const cardElement = template.cloneNode(true);
+  cardElement.querySelector('.element__title').textContent = titlegg;
+  cardElement.querySelector('.element__img').src = fgg;
+  //cardElement.querySelector('.element__img').alt = name.name;
+
+  elementsList.prepend(cardElement);
+
+  
+  closePopup(popupFormAddCards) 
+
+} );
+
+
+
 
 
 
