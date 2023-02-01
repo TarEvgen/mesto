@@ -15,8 +15,11 @@
 @import url(../blocks/elements/__list/elements__list.css);
 @import url(../blocks/element/element.css);
 @import url(../blocks/element/__button/element__button.css);
+@import url(../blocks/element/__group-img.css/element__group-img.css);
 @import url(../blocks/element/__img/element__img.css);
 @import url(../blocks/element/__title/element__title.css);
+@import url(../blocks/element/__delete/element__delete.css);
+@import url(../blocks/element/__button/_active/element__button_active.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__author/footer__author.css);
 @import url(../blocks/popup/popup.css);

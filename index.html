@@ -71,17 +71,31 @@
         <button class="popup__close popup__close_add-cards" type="button"></button>
         <h2 class="popup__title">Новое место</h2>
         <form class="popup__form" name="form">
-          <input class="popup__input popup__input_type_title" type="text" name="user">
-          <input class="popup__input popup__input_type_link" type="text" name="data">
+          <input class="popup__input popup__input_type_title" type="text" name="user" placeholder="Название">
+          <input class="popup__input popup__input_type_link" type="url" name="data" placeholder="Ссылка на картинку">
           <button class="popup__save popup__save_create" type="submit">Создать</button>
         </form>
       </div>
     </div>
+    <div class="popup popup_open-img   popup_opened ">
+      <div class="popup__content">
+
+        <img class=""
+        <button class="popup__close popup__close_img" type="button"></button>
+        <h2 class="popup__title">Новое место</h2>
+        
+      </div>
+    </div>
     <template class="card">
       <li class="element">
-        <img class="element__img">
+      
+          <img class="element__img">
+          <button class="element__delete" type="button"></button>
+        
         <h2 class="element__title"></h2>
         <button class="element__button" type="button"></button>
+        
+        
       </li>
     </template>
   </div>

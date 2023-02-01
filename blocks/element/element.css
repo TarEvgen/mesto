@@ -5,6 +5,7 @@
   display: grid;
   grid-template-columns: auto 44px;
   border-radius: 10px;
+  
   grid-template-areas: "img img"
                        "title button";
 }
