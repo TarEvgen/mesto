@@ -1,0 +1,29 @@
+.popup__data {
+
+    display: flex;
+    
+    flex-direction: column;
+    
+    margin: 0;
+    margin: auto;
+    position: relative;
+
+}
+
+
+
+/*.popup__content {
+   
+    display: flex;
+    flex-direction: column;
+    
+    margin: 0;
+    margin: auto;
+    position: relative;
+  }
+  
+  @media screen and (max-width: 620px) {
+    .popup__content {
+      max-width: 282px;
+    }
+  }*/
