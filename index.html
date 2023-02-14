@@ -33,9 +33,11 @@
       <div class="popup__content">
         <button class="popup__close popup__close_edit-profile" type="button"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form" name="form">
-          <input class="popup__input popup__input_type_name" type="text" name="user">
-          <input class="popup__input popup__input_type_data" type="text" name="data">
+        <form class="popup__form popup__form_profile" novalidate>
+          <input class="popup__input popup__input_type_name" type="text" id="name-field"  required minlength="2" maxlength="40">
+          <span class="popup__input-error popup__input-error_field_user"></span>
+          <input class="popup__input popup__input_type_data" type="text" id="data-field"  required minlength="2" maxlength="200">
+          <span class="popup__input-error popup__input-error_field_data"></span>
           <button class="popup__save" type="submit">Сохранить</button>
         </form>
       </div>
@@ -44,9 +46,11 @@
       <div class="popup__content">
         <button class="popup__close popup__close_add-cards" type="button"></button>
         <h2 class="popup__title">Новое место</h2>
-        <form class="popup__form" name="form">
-          <input class="popup__input popup__input_type_title" type="text" name="user" placeholder="Название">
-          <input class="popup__input popup__input_type_link" type="url" name="data" placeholder="Ссылка на картинку">
+        <form class="popup__form  ааа" novalidate>
+          <input class="popup__input popup__input_type_title" type="text" id="name-field"  placeholder="Название" minlength="2" required>
+          <span class="popup__input-error popup__input-error_field_name"></span>
+          <input class="popup__input popup__input_type_link" type="url" id="data-field"  placeholder="Ссылка на картинку" minlength="2" required>
+          <span class="popup__input-error popup__input-error_field_link"></span>
           <button class="popup__save popup__save_create" type="submit">Создать</button>
         </form>
       </div>
@@ -67,7 +71,14 @@
       </li>
     </template>
   </div>
-  <script src="./scripts/cards.js"></script>
-  <script src="./scripts/scripts.js"></script>
+  
+  
+  
+  
+  
+
+  <script defer src="./scripts/cards.js"></script>
+  <script defer src="./scripts/validate.js"></script>
+  <script defer src="./scripts/scripts.js"></script>
 </body>
 </html>
