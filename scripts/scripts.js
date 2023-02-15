@@ -5,9 +5,6 @@ const popupFormProfile = document.querySelector(".popup_edit-profile");
 const popupFormAddCards = document.querySelector(".popup_add-cards");  
 const popupFormImg = document.querySelector(".popup_open-img");
 
-const popupBtnClose = document.querySelector(".popup__close_edit-profile");
-const popupBtnCloseAddCard = document.querySelector(".popup__close_add-cards");  
-const popupBtnCloseImg = document.querySelector(".popup__close_img");
 
 const userLogin = document.querySelector(".profile__login");
 const userActivity = document.querySelector(".profile__activity");
@@ -29,49 +26,35 @@ const cardDataLink = popupFormImg.querySelector('.popup__img')
 const cardDataName =  popupFormImg.querySelector('.popup__img')
 const CardDataContent = popupFormImg.querySelector('.popup__description')
 
-
-
-//const bbb = document.querySelectorAll('.popup__form')
-//profileForm
-//console.log(bbb)
-
-//const ccc = 
+const popupContener = document.querySelectorAll('.popup')
 
 
 
+popupContener.forEach((popup) =>{
+  const closetB = popup.querySelector('.popup__close')
+  popup.addEventListener('click', function(event) {
+    if (event.target === closetB || event.target === event.currentTarget) {
+      closePopup(popup)
+    }  
+});
 
 
+})
 
 
+function closePopupEscape(evt) {
+  const popupOpen =document.querySelector('.popup_opened')
+  if (evt.key === 'Escape') { closePopup(popupOpen); }
 
-//const aaa = document.querySelector('.ааа')
-//const formPlaceFields = Array.from(aaa.querySelectorAll('.popup__input'))
-//const battonSaveForm = aaa.querySelector('.popup__save')
+  
 
-//const aaa = document.querySelector(config.form)
+}
 
-
-
-
-
-
-
-
-
-//console.log(formPlaceFields)
-//console.log(battonSaveForm)
-//console.log(profileForm)
-
-
-// const formInput = profileForm.querySelectorAll('.popup__input')
-// const formError = profileForm.querySelector(`#${formInput.id} + .popup__input-error`)
-
-// console.log(formError)
 enableValidation(formsConfig);
 
 function openPopup(popup) {
   popup.classList.add("popup_opened"); 
-  
+  document.addEventListener('keydown', closePopupEscape);   
   
 }
 
@@ -83,10 +66,14 @@ function openProfilePopup(popup) {
 
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
+  document.removeEventListener('keydown', closePopupEscape); 
 }
 
 function handleProfileFormSubmit (evt) {
+  
   evt.preventDefault(); 
+  
+
   userLogin.textContent = nameInput.value;
   userActivity.textContent = jobInput.value;
   closePopup(popupFormProfile)  
@@ -108,6 +95,8 @@ cardFormSubmitButton.addEventListener('click', (evt) => {
   const cardElement = createCard({name: name, link: link});
   cardsContainer.prepend(cardElement); 
   closePopup(popupFormAddCards);
+  
+ 
   inputTitle.value = "";
   inputLink.value = "";
   
@@ -136,78 +125,8 @@ function createCard(cardData) {
   return cardElement;
 }
 
-
-
-
-popupBtnClose.addEventListener("click", () => closePopup(popupFormProfile));
-popupBtnCloseAddCard.addEventListener("click", () => closePopup(popupFormAddCards));
-popupBtnCloseImg.addEventListener("click", () => closePopup(popupFormImg));
-
 popupBtnOpenProfile.addEventListener("click", () => openProfilePopup(popupFormProfile));
 popupBtnOpenAddCard.addEventListener("click", () => openPopup(popupFormAddCards));
 
-profileForm.addEventListener ('submit', handleProfileFormSubmit);
+profileForm.addEventListener('submit', handleProfileFormSubmit);
 
-
- 
-
-//consol.log(formError);
-
-//////////////////////////////////////////////////////////////////////
-
-// const showError = (input, errorMessage) => {
-//   input.classList.add('form__input_type_error'); 
-//   formError.textContent = errorMessage;
-//   formError.classList.add('form__input-error_active');
-//   showError(formInput, formInput.validationMessage); 
-  
-// };
-
-
-// const hideError = (input) => {
-//    input.classList.remove('form__input_type_error'); 
-//    formError.classList.remove('form__input-error_active');
-//    formError.textContent = '';
-// };
-
-
-// const checkInputValidity = () => {
-//   if (!formInput.validity.valid) {
-//    showError(formInput, showError );
-//  } else {
-//    hideError(formInput);
-//  } 
-//  };
-
-//  formInput.addEventListener('input', function () {    ///слушатель ввода
-//   checkInputValidity();
-// });
-
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-//console.log(formPlaceFields)
-
-
-// const handleProfileFormSubmit = (evt) => {
-//   evt.preventDefault();
-//   const formIsValid = formPlaceFields.every(({validity}) => validity.valid);
-
-//   battonSaveForm.setAttribute('disabled', 'disabled');
-// if (formIsValid) {
-//   const user = e.target.user.value;
-//   const data = e.target.data.value;
-
-
-//  // closePopup(popupFormProfile)
-
-//   //const
-
-// }
-
-
-// }
