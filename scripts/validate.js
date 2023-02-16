@@ -6,14 +6,14 @@ const formsConfig = {
 }
 
 const enableValidation = (config) => {
-  const aaa = Array.from(document.querySelectorAll(config.formSelector))
-  aaa.forEach((popupForm) => {
+  const formsPopup = Array.from(document.querySelectorAll(config.formSelector))
+  formsPopup.forEach((popupForm) => {
     const formPlaceFields = Array.from(popupForm.querySelectorAll(config.inputSelector))
-    const battonSaveForm = popupForm.querySelector(config.submitButtonSelector)
+    const formBattonSave = popupForm.querySelector(config.submitButtonSelector)
     formPlaceFields.forEach((elementField) => {
       const elementError = popupForm.querySelector(`#${elementField.id} + .popup__input-error`);
-      elementField.addEventListener('input', (e) => {
-        const field = e.target;
+      elementField.addEventListener('input', (evt) => {
+        const field = evt.target;
         const fieldIsValid = field.validity.valid;
         elementError.textContent = field.validationMessage;
           if (!fieldIsValid) {
@@ -24,10 +24,10 @@ const enableValidation = (config) => {
           }
         const formIsValid = formPlaceFields.every(({validity}) => validity.valid);
           if (formIsValid) {
-            battonSaveForm.removeAttribute('disabled');
+            formBattonSave.removeAttribute('disabled');
           } 
           else {
-            battonSaveForm.setAttribute('disabled', 'disabled');
+            formBattonSave.setAttribute('disabled', 'disabled');
           }
       });
     });
