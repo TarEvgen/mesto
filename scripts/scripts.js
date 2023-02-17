@@ -23,8 +23,6 @@ const cardDataName =  popupFormImg.querySelector('.popup__img')
 const CardDataContent = popupFormImg.querySelector('.popup__description')
 const popupList = document.querySelectorAll('.popup')
 
-
-
 popupList.forEach((popup) =>{
   popup.addEventListener('click', function(evt) {
     if ( evt.target.classList.contains('popup__close') || evt.target === evt.currentTarget) {
@@ -42,7 +40,8 @@ function closeEscapePopup(evt) {
 
 function openPopup(popup) {
   popup.classList.add("popup_opened"); 
-  document.addEventListener('keydown', closeEscapePopup); 
+  document.addEventListener('keydown', closeEscapePopup);
+  enableValidation(formsConfig);
 }
 
 function openProfilePopup(popup) { 
@@ -60,7 +59,7 @@ function handleProfileFormSubmit (evt) {
   evt.preventDefault(); 
   userLogin.textContent = nameInput.value;
   userActivity.textContent = jobInput.value;
-  closePopup(popupFormProfile); 
+  closePopup(popupFormProfile);
 }
 
 renderInitialCards();
@@ -105,8 +104,6 @@ function createCard(cardData) {
     })
   return cardElement;
 }
-
-enableValidation(formsConfig);
 
 popupBtnOpenProfile.addEventListener("click", () => openProfilePopup(popupFormProfile));
 popupBtnOpenAddCard.addEventListener("click", () => openPopup(popupFormAddCards));
