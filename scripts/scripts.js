@@ -23,6 +23,8 @@ const cardDataName =  popupFormImg.querySelector('.popup__img')
 const CardDataContent = popupFormImg.querySelector('.popup__description')
 const popupList = document.querySelectorAll('.popup')
 
+const saveBtnCard = cardForm.querySelector('.popup__save_create')
+
 popupList.forEach((popup) =>{
   popup.addEventListener('click', function(evt) {
     if ( evt.target.classList.contains('popup__close') || evt.target === evt.currentTarget) {
@@ -41,7 +43,6 @@ function closeEscapePopup(evt) {
 function openPopup(popup) {
   popup.classList.add("popup_opened"); 
   document.addEventListener('keydown', closeEscapePopup);
-  enableValidation(formsConfig);
 }
 
 function openProfilePopup(popup) { 
@@ -79,6 +80,7 @@ cardForm.addEventListener('submit', (evt) => {
   cardsContainer.prepend(cardElement); 
   closePopup(popupFormAddCards);
   cardForm.reset();
+  inactiveButtonState (saveBtnCard);
 });
 
 function createCard(cardData) {
@@ -104,6 +106,8 @@ function createCard(cardData) {
     })
   return cardElement;
 }
+
+enableValidation(formsConfig);
 
 popupBtnOpenProfile.addEventListener("click", () => openProfilePopup(popupFormProfile));
 popupBtnOpenAddCard.addEventListener("click", () => openPopup(popupFormAddCards));
