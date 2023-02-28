@@ -12,7 +12,11 @@ const profileForm = document.querySelector(".popup__form_profile");
 const cardForm = document.querySelector(".popup__form_add-cards");
 const nameInput = document.querySelector(".popup__input_type_name");
 const jobInput = document.querySelector(".popup__input_type_data"); 
-const templateCard = document.querySelector('.card').content.querySelector('.element');
+
+/////
+//const templateCard = document.querySelector('.card').content.querySelector('.element');
+////
+
 
 const cardsContainer = document.querySelector('.elements__list'); 
 const inputTitle = document.querySelector('.popup__input_type_title');
@@ -25,6 +29,172 @@ const popupList = document.querySelectorAll('.popup')
 
 const saveBtnCard = cardForm.querySelector('.popup__save_create')
 
+///////////////////////////////////
+class Card {
+  constructor(data, templateSelector) {
+    this._name = data.name;
+    this._link = data.link;
+    this._templateSelector = templateSelector; 
+  }
+
+  _getTemplate() {
+    const cardElement = document
+    .querySelector(this._templateSelector)
+    .content
+    .querySelector('.element')
+    .cloneNode(true);
+
+    return cardElement; 
+  }
+
+
+  generateCard () {
+
+    this._element = this._getTemplate();
+    this._setEventListeners();
+
+   // console.log(this._element)
+    //console.log("Созданный метод")
+    this._element.querySelector('.element__title').textContent = this._name;
+    this._element.querySelector('.element__img').src = this._link;
+
+    //const elementImg = cardElement.querySelector('.element__img');
+   // elementImg.src = cardData.link;
+   // elementImg.src = cardData.link;
+
+    return this._element;
+
+
+  }
+
+
+  _setEventListeners() {
+    this._element.querySelector('.element__delete').addEventListener('click',() => {
+      this._deleteCard()
+     });
+
+    this._element.querySelector('.element__button').addEventListener('click',() => {
+      this._likeCard()
+    });
+
+
+
+    this._element.querySelector('.element__img').addEventListener('click',() => {
+      openPopup(popupFormImg)
+      console.log(popupFormImg)
+      console.log(this._element)
+
+      CardDataContent.textContent = this._name;
+      cardDataLink.src = this._link; 
+    
+    
+    })
+    
+
+
+
+
+    
+
+
+  }
+
+
+_deleteCard() {
+  this._element.remove();
+}
+
+_likeCard() {
+  this._element.querySelector('.element__button').classList.toggle("element__button_active");
+}
+
+
+
+
+
+
+
+
+/* elementImg.addEventListener('click',() => {
+      openPopup(popupFormImg)           
+      cardDataLink.src = cardData.link;
+      cardDataName.alt = cardData.name;
+      CardDataContent.textContent = cardData.name;       
+    })*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+initialCards.forEach((item) => {
+
+ // console.log(item)
+  //console.log(item.link)
+  //console.log(item.name)
+  // Создадим экземпляр карточки
+  const card = new Card(item, '.card_sample_place' );
+
+  //console.log(card)
+  // Создаём карточку и возвращаем наружу
+  const cardElement = card.generateCard();
+
+  // Добавляем в DOM
+  cardsContainer.append(cardElement);
+}); 
+
+
+
+
+
+
+//const templateCard = document.querySelector('.card').content.querySelector('.element');
+
+
+/*function createCard(cardData) {
+  const cardElement = templateCard.cloneNode(true);
+  const elementImg = cardElement.querySelector('.element__img');
+    cardElement.querySelector('.element__title').textContent = cardData.name;
+    elementImg.src = cardData.link;
+    elementImg.alt = cardData.name;
+    cardElement.querySelector('.element__delete').addEventListener('click',() => {
+      cardElement.remove();
+    });
+      
+    const buttonLike = cardElement.querySelector('.element__button');
+    buttonLike.addEventListener('click',() => {
+      buttonLike.classList.toggle("element__button_active");
+    });   
+    
+    elementImg.addEventListener('click',() => {
+      openPopup(popupFormImg)           
+      cardDataLink.src = cardData.link;
+      cardDataName.alt = cardData.name;
+      CardDataContent.textContent = cardData.name;       
+    })
+  return cardElement;
+}*/
+
+
+
+
+
+
+
+
+
+
+///////////////////////////////////////
 popupList.forEach((popup) =>{
   popup.addEventListener('click', function(evt) {
     if ( evt.target.classList.contains('popup__close') || evt.target === evt.currentTarget) {
@@ -63,7 +233,7 @@ function handleProfileFormSubmit (evt) {
   closePopup(popupFormProfile);
 }
 
-renderInitialCards();
+//renderInitialCards();
 
 function renderInitialCards() {
   const cards = initialCards.map((cardData) => {
@@ -83,29 +253,29 @@ cardForm.addEventListener('submit', (evt) => {
   inactiveButtonState (saveBtnCard);
 });
 
-function createCard(cardData) {
-  const cardElement = templateCard.cloneNode(true);
-  const elementImg = cardElement.querySelector('.element__img');
-    cardElement.querySelector('.element__title').textContent = cardData.name;
-    elementImg.src = cardData.link;
-    elementImg.alt = cardData.name;
-    cardElement.querySelector('.element__delete').addEventListener('click',() => {
-      cardElement.remove();
-    });
+//function createCard(cardData) {
+  //const cardElement = templateCard.cloneNode(true);
+  //const elementImg = cardElement.querySelector('.element__img');
+    //cardElement.querySelector('.element__title').textContent = cardData.name;
+   // elementImg.src = cardData.link;
+   // elementImg.alt = cardData.name;
+   // cardElement.querySelector('.element__delete').addEventListener('click',() => {
+    //  cardElement.remove();
+  //  });
       
-    const buttonLike = cardElement.querySelector('.element__button');
+   /* const buttonLike = cardElement.querySelector('.element__button');
     buttonLike.addEventListener('click',() => {
       buttonLike.classList.toggle("element__button_active");
     });   
     
-    elementImg.addEventListener('click',() => {
+   /* elementImg.addEventListener('click',() => {
       openPopup(popupFormImg)           
       cardDataLink.src = cardData.link;
       cardDataName.alt = cardData.name;
       CardDataContent.textContent = cardData.name;       
-    })
-  return cardElement;
-}
+    })*/
+  /*return cardElement;
+}*/
 
 enableValidation(formsConfig);
 
