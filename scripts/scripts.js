@@ -1,3 +1,48 @@
+import { Card } from './Card.js'
+import { FormValidator } from './FormValidator.js'
+
+
+
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
+
+
+const formsConfig = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input', 
+  submitButtonSelector: '.popup__save',
+  inputErrorClass: 'popup__input_type_error', 
+}
+
+
+
+
+
+
 const popupBtnOpenProfile = document.querySelector(".profile__edit");
 const popupBtnOpenAddCard = document.querySelector(".profile__add");
 
@@ -30,111 +75,6 @@ const popupList = document.querySelectorAll('.popup')
 const saveBtnCard = cardForm.querySelector('.popup__save_create')
 
 ///////////////////////////////////
-class Card {
-  constructor(data, templateSelector) {
-    this._name = data.name;
-    this._link = data.link;
-    this._templateSelector = templateSelector; 
-  }
-
-  _getTemplate() {
-    const cardElement = document
-    .querySelector(this._templateSelector)
-    .content
-    .querySelector('.element')
-    .cloneNode(true);
-
-    return cardElement; 
-  }
-
-
-  generateCard () {
-
-    this._element = this._getTemplate();
-    this._setEventListeners();
-
-   // console.log(this._element)
-    //console.log("Созданный метод")
-    this._element.querySelector('.element__title').textContent = this._name;
-    this._element.querySelector('.element__img').src = this._link;
-
-    //const elementImg = cardElement.querySelector('.element__img');
-   // elementImg.src = cardData.link;
-   // elementImg.src = cardData.link;
-
-    return this._element;
-
-
-  }
-
-
-  _setEventListeners() {
-    this._element.querySelector('.element__delete').addEventListener('click',() => {
-      this._deleteCard()
-     });
-
-    this._element.querySelector('.element__button').addEventListener('click',() => {
-      this._likeCard()
-    });
-
-
-
-    this._element.querySelector('.element__img').addEventListener('click',() => {
-      openPopup(popupFormImg)
-      console.log(popupFormImg)
-      console.log(this._element)
-
-      CardDataContent.textContent = this._name;
-      cardDataLink.src = this._link; 
-    
-    
-    })
-    
-
-
-
-
-    
-
-
-  }
-
-
-_deleteCard() {
-  this._element.remove();
-}
-
-_likeCard() {
-  this._element.querySelector('.element__button').classList.toggle("element__button_active");
-}
-
-
-
-
-
-
-
-
-/* elementImg.addEventListener('click',() => {
-      openPopup(popupFormImg)           
-      cardDataLink.src = cardData.link;
-      cardDataName.alt = cardData.name;
-      CardDataContent.textContent = cardData.name;       
-    })*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
 
 
 initialCards.forEach((item) => {
@@ -154,7 +94,10 @@ initialCards.forEach((item) => {
 }); 
 
 
+//enableValidation(formsConfig);
 
+const formValidator = new FormValidator(formsConfig, document.querySelectorAll(formsConfig.formSelector) )
+formValidator.enableValidation()
 
 
 
@@ -211,6 +154,7 @@ function closeEscapePopup(evt) {
 }
 
 function openPopup(popup) {
+  
   popup.classList.add("popup_opened"); 
   document.addEventListener('keydown', closeEscapePopup);
 }
@@ -277,7 +221,7 @@ cardForm.addEventListener('submit', (evt) => {
   /*return cardElement;
 }*/
 
-enableValidation(formsConfig);
+
 
 popupBtnOpenProfile.addEventListener("click", () => openProfilePopup(popupFormProfile));
 popupBtnOpenAddCard.addEventListener("click", () => openPopup(popupFormAddCards));

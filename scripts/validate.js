@@ -26,11 +26,20 @@ const checkInputValidity = (formElement, inputElement) => {
 }
 
 function setEventListeners(formElement) {
+  console.log("setEventListeners")
   const inputList = Array.from(formElement.querySelectorAll(formsConfig.inputSelector));
   const buttonElement = formElement.querySelector(formsConfig.submitButtonSelector);
   toggleButtonState(inputList, buttonElement);
   inputList.forEach((inputElement) => {
+    
+    console.log("inputList")
+    console.log(inputList)
+
+console.log("inputElement")
+console.log(inputElement)
     inputElement.addEventListener('input', function () {
+
+      console.log("sddввод")
       checkInputValidity(formElement, inputElement);
       toggleButtonState(inputList, buttonElement);
     });
@@ -38,9 +47,14 @@ function setEventListeners(formElement) {
 }
 
 function enableValidation (config) {
+
+  console.log("enableValidation")
   const formList = Array.from(document.querySelectorAll(config.formSelector));
+
+
   formList.forEach((formElement) => {
     formElement.addEventListener('submit', (evt) => {
+      console.log("formElement.addEventListener('submit'")
       evt.preventDefault();
     });
     setEventListeners(formElement);
@@ -54,6 +68,8 @@ function hasInvalidInput(inputList) {
 }
 
 function toggleButtonState (inputList, buttonElement) {
+  console.log("toggleButtonState ")
+
   if (hasInvalidInput(inputList)) {
     inactiveButtonState (buttonElement);
   } else {
