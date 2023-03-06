@@ -75,30 +75,57 @@ const popupList = document.querySelectorAll('.popup')
 const saveBtnCard = cardForm.querySelector('.popup__save_create')
 
 ///////////////////////////////////
-
+const ttt = (name, link) => {
+                
+  cardDataLink.src = link;
+  cardDataName.alt = name;
+  CardDataContent.textContent = name; 
+  openPopup(popupFormImg)       
+}
 
 initialCards.forEach((item) => {
 
- // console.log(item)
-  //console.log(item.link)
-  //console.log(item.name)
-  // Создадим экземпляр карточки
-  const card = new Card(item, '.card_sample_place' );
+ console.log(item, 'item')
 
-  //console.log(card)
-  // Создаём карточку и возвращаем наружу
+
+  const card = new Card(item, '.card_sample_place', ttt);
+
   const cardElement = card.generateCard();
 
-  // Добавляем в DOM
   cardsContainer.append(cardElement);
 }); 
 
 
-//enableValidation(formsConfig);
+
+cardForm.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+  const name = inputTitle.value;
+  const link = inputLink.value;
+  console.log(name, 'name')
+  console.log(openPopup, 'openPopup')
+  const cardElement = new Card({name: name, link: link}, '.card_sample_place', ttt);
+  const cardElemdents = cardElement.generateCard()
+  console.log(cardElement, 'cardElement')
+  cardsContainer.prepend(cardElemdents); 
+  closePopup(popupFormAddCards);
+  cardForm.reset();
+  formValidator.inactiveButtonState (saveBtnCard);
+});
+
+
+
+
+
+
+
 
 const formValidator = new FormValidator(formsConfig, document.querySelectorAll(formsConfig.formSelector) )
 formValidator.enableValidation()
 
+
+
+
+//const elementImg = cardElement.querySelector('.element__img');
 
 
 //const templateCard = document.querySelector('.card').content.querySelector('.element');
@@ -118,17 +145,19 @@ formValidator.enableValidation()
     buttonLike.addEventListener('click',() => {
       buttonLike.classList.toggle("element__button_active");
     });   
-    
-    elementImg.addEventListener('click',() => {
+    */
+  /*  elementImg.addEventListener('click',() => {
       openPopup(popupFormImg)           
       cardDataLink.src = cardData.link;
       cardDataName.alt = cardData.name;
       CardDataContent.textContent = cardData.name;       
     })
+
+    /*
   return cardElement;
-}*/
 
 
+*/
 
 
 
@@ -153,12 +182,22 @@ function closeEscapePopup(evt) {
   }  
 }
 
-function openPopup(popup) {
+function openPopup (popup) {
+  
+  popup.classList.add("popup_opened"); 
+  document.addEventListener('keydown', closeEscapePopup);
+
+}
+
+
+
+
+/*function openPopup(popup) {
   
   popup.classList.add("popup_opened"); 
   document.addEventListener('keydown', closeEscapePopup);
 }
-
+*/
 function openProfilePopup(popup) { 
   nameInput.value = userLogin.textContent;
   jobInput.value = userActivity.textContent;
@@ -179,23 +218,26 @@ function handleProfileFormSubmit (evt) {
 
 //renderInitialCards();
 
-function renderInitialCards() {
+/*function renderInitialCards() {
   const cards = initialCards.map((cardData) => {
     return createCard(cardData) 
   });
   cardsContainer.append(...cards); 
-}
+}*/
 
-cardForm.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  const name = inputTitle.value;
-  const link = inputLink.value;
-  const cardElement = createCard({name: name, link: link});
-  cardsContainer.prepend(cardElement); 
-  closePopup(popupFormAddCards);
-  cardForm.reset();
-  inactiveButtonState (saveBtnCard);
-});
+
+
+
+
+/*const card = new Card(item, '.card_sample_place' );
+
+//console.log(card)
+// Создаём карточку и возвращаем наружу
+const cardElement = card.generateCard();
+*/
+
+
+
 
 //function createCard(cardData) {
   //const cardElement = templateCard.cloneNode(true);
@@ -211,13 +253,11 @@ cardForm.addEventListener('submit', (evt) => {
     buttonLike.addEventListener('click',() => {
       buttonLike.classList.toggle("element__button_active");
     });   
+    */
+   
     
-   /* elementImg.addEventListener('click',() => {
-      openPopup(popupFormImg)           
-      cardDataLink.src = cardData.link;
-      cardDataName.alt = cardData.name;
-      CardDataContent.textContent = cardData.name;       
-    })*/
+    /*
+    */
   /*return cardElement;
 }*/
 

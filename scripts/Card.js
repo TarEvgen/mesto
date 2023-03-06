@@ -1,10 +1,12 @@
 
 
 export class Card {
-  constructor(data, templateSelector) {
+  constructor(data, templateSelector, ttt) {
     this._name = data.name;
     this._link = data.link;
     this._templateSelector = templateSelector; 
+    console.log(templateSelector, "templateSelector")
+    this._ttt = ttt;
   }
 
   _getTemplate() {
@@ -50,13 +52,11 @@ export class Card {
 
 
     this._element.querySelector('.element__img').addEventListener('click',() => {
-      openPopup(popupFormImg)
-      console.log(popupFormImg)
-      console.log(this._element)
-
-      CardDataContent.textContent = this._name;
-      cardDataLink.src = this._link; 
-    
+      
+     console.log(this._name, this._link)
+       
+      
+      this._ttt(this._name, this._link)
     
     })
     
@@ -78,19 +78,6 @@ _likeCard() {
   this._element.querySelector('.element__button').classList.toggle("element__button_active");
 }
 
-
-
-
-
-
-
-
-/* elementImg.addEventListener('click',() => {
-      openPopup(popupFormImg)           
-      cardDataLink.src = cardData.link;
-      cardDataName.alt = cardData.name;
-      CardDataContent.textContent = cardData.name;       
-    })*/
 
 
 
