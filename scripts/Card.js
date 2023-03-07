@@ -4,6 +4,9 @@ export class Card {
     this._link = data.link;
     this._templateSelector = templateSelector; 
     this._dataCard = dataCard;
+    this._element = this._getTemplate();
+    this._imageElement = this._element.querySelector('.element__img');
+    this._elementButtonLike = this._element.querySelector('.element__button');
   }
 
   _getTemplate() {
@@ -16,11 +19,10 @@ export class Card {
   }
 
   generateCard () {
-    this._element = this._getTemplate();
     this._setEventListeners();
     this._element.querySelector('.element__title').textContent = this._name;
-    this._element.querySelector('.element__img').src = this._link;
-    this._element.querySelector('.element__img').alt = this._name;
+    this._imageElement.src = this._link;
+    this._imageElement.alt = this._name;
     return this._element;
   }
 
@@ -28,10 +30,10 @@ export class Card {
     this._element.querySelector('.element__delete').addEventListener('click',() => {
       this._deleteCard()
     });
-    this._element.querySelector('.element__button').addEventListener('click',() => {
+    this._elementButtonLike.addEventListener('click',() => {
       this._likeCard()
     });
-    this._element.querySelector('.element__img').addEventListener('click',() => {
+    this._imageElement.addEventListener('click',() => {
       this._dataCard(this._name, this._link)
     })
   }
@@ -41,7 +43,7 @@ export class Card {
   }
 
   _likeCard() {
-    this._element.querySelector('.element__button').classList.toggle("element__button_active");
+    this._elementButtonLike.classList.toggle("element__button_active");
   }
 };
 

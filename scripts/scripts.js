@@ -38,8 +38,10 @@ const dataCard = (name, link) => {
   openPopup(popupFormImg)       
 }
 
-const formValidator = new FormValidator(formsConfig, document.querySelectorAll(formsConfig.formSelector) )
-formValidator.enableValidation()
+const profileFormValidator = new FormValidator(formsConfig, profileForm)
+profileFormValidator.enableValidation()
+const cardFormValidator = new FormValidator(formsConfig, cardForm)
+cardFormValidator.enableValidation() 
 
 initialCards.forEach(({name: name, link: link}) => {
   addClassCard ({name: name, link: link})
@@ -52,7 +54,7 @@ cardForm.addEventListener('submit', (evt) => {
   addClassCard ({name: name, link: link})
   closePopup(popupFormAddCards);
   cardForm.reset();
-  formValidator.inactiveButtonState (saveBtnCard);
+  cardFormValidator.inactiveButtonState ();
 });
 
 popupList.forEach((popup) => {
@@ -81,7 +83,7 @@ function openPopup (popup) {
   document.addEventListener('keydown', closeEscapePopup);
 }
 
-function openProfilePopup(popup) { 
+function openProfilePopup(popup) {
   nameInput.value = userLogin.textContent;
   jobInput.value = userActivity.textContent;
   openPopup(popup);
