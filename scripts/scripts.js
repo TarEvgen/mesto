@@ -17,7 +17,6 @@ const popupFormAddCards = document.querySelector(".popup_add-cards");
 
 const popupFormImg = document.querySelector(".popup_open-img");
 const cardDataLink = popupFormImg.querySelector('.popup__img')
-const cardDataName =  popupFormImg.querySelector('.popup__img')
 const CardDataContent = popupFormImg.querySelector('.popup__description')
 const userLogin = document.querySelector(".profile__login");
 const userActivity = document.querySelector(".profile__activity");
@@ -34,7 +33,7 @@ const saveBtnCard = cardForm.querySelector('.popup__save_create')
 
 const dataCard = (name, link) => {
   cardDataLink.src = link;
-  cardDataName.alt = name;
+  cardDataLink.alt = name;
   CardDataContent.textContent = name; 
   openPopup(popupFormImg)       
 }
