@@ -1,7 +1,8 @@
 export class Card {
-  constructor(data, templateSelector, dataCard) {
-    this._name = data.name;
-    this._link = data.link;
+  constructor(initialCards, templateSelector, dataCard) {
+    //console.log(data.link)
+    this._name = initialCards.name;
+    this._link = initialCards.link;
     this._templateSelector = templateSelector; 
     this._dataCard = dataCard;
     this._element = this._getTemplate();
@@ -23,7 +24,9 @@ export class Card {
     this._element.querySelector('.element__title').textContent = this._name;
     this._imageElement.src = this._link;
     this._imageElement.alt = this._name;
+    //console.log(this._link)
     return this._element;
+
   }
 
   _setEventListeners() {

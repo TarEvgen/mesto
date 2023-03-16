@@ -1,6 +1,7 @@
 import { Card } from './Card.js'
 import { FormValidator } from './FormValidator.js'
 import { initialCards } from './initialCards.js'
+import { Section } from './Section.js'
 
 const formsConfig = {
   formSelector: '.popup__form',
@@ -25,11 +26,12 @@ const profileForm = document.querySelector(".popup__form_profile");
 const cardForm = document.querySelector(".popup__form_add-cards");
 const nameInput = document.querySelector(".popup__input_type_name");
 const jobInput = document.querySelector(".popup__input_type_data"); 
-const cardsContainer = document.querySelector('.elements__list'); 
+const cardsContainer = '.elements__list'; 
+const selectorPopup = '.popup';
 const inputTitle = document.querySelector('.popup__input_type_title');
 const inputLink = document.querySelector('.popup__input_type_link');
 const popupList = document.querySelectorAll('.popup')
-const saveBtnCard = cardForm.querySelector('.popup__save_create')
+//const saveBtnCard = cardForm.querySelector('.popup__save_create')
 
 const dataCard = (name, link) => {
   cardDataLink.src = link;
@@ -38,20 +40,64 @@ const dataCard = (name, link) => {
   openPopup(popupFormImg)       
 }
 
+
+
+
+
+
+function createCard (item) {
+  const card = new Card(item, '.card_sample_place', dataCard);
+  
+  const cardElemdent = card.generateCard()
+  return cardElemdent
+ 
+} 
+
+
+
 const profileFormValidator = new FormValidator(formsConfig, profileForm)
 profileFormValidator.enableValidation()
 const cardFormValidator = new FormValidator(formsConfig, cardForm)
 cardFormValidator.enableValidation() 
 
+///// тест
+
+
+
+
+const defaultCardList = new Section({items: initialCards, renderer: (item) => {
+
+              //const cardElemdent = createCard (item)
+
+
+
+        //console.log(cardElemdent)
+
+
+        defaultCardList.renderCards (createCard (item))
+
+    }
+  },
+ cardsContainer
+
+);
+
+defaultCardList.renderer();
+
+
+///// тест  
+
+/*
 initialCards.forEach(({name: name, link: link}) => {
   addClassCard ({name: name, link: link})
 }); 
-
+*/
 cardForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
   const name = inputTitle.value;
   const link = inputLink.value;
   addClassCard ({name: name, link: link})
+ 
   closePopup(popupFormAddCards);
   cardForm.reset();
   cardFormValidator.inactiveButtonState ();
@@ -66,9 +112,12 @@ popupList.forEach((popup) => {
 });
 
 function addClassCard ({name: name, link: link}) {
-  const card = new Card({name: name, link: link}, '.card_sample_place', dataCard);
-  const cardElemdent = card.generateCard()
-  cardsContainer.prepend(cardElemdent); 
+  
+   
+  
+ 
+  defaultCardList.addItem (createCard ({name: name, link: link}));
+  
 }
 
 function closeEscapePopup(evt) {
