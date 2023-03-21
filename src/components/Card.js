@@ -1,6 +1,5 @@
 export class Card {
   constructor(initialCards, templateSelector, handleCardClick) {
-    //console.log(data.link)
     this._name = initialCards.name;
     this._link = initialCards.link;
     this._templateSelector = templateSelector; 
@@ -24,20 +23,18 @@ export class Card {
     this._element.querySelector('.element__title').textContent = this._name;
     this._imageElement.src = this._link;
     this._imageElement.alt = this._name;
-    //console.log(this._link)
     return this._element;
-
   }
 
   _setEventListeners() {
     this._element.querySelector('.element__delete').addEventListener('click',() => {
-      this._deleteCard()
+      this._deleteCard();
     });
     this._elementButtonLike.addEventListener('click',() => {
-      this._likeCard()
+      this._likeCard();
     });
     this._imageElement.addEventListener('click',() => {
-      this._openPopupImg()
+      this._openPopupImg();
     })
   }
 
@@ -49,16 +46,9 @@ export class Card {
     this._elementButtonLike.classList.toggle("element__button_active");
   }
 
-
   _openPopupImg () {
-
-
-    this._handleCardClick(this._name, this._link)
-
-
+    this._handleCardClick(this._name, this._link);
   }
-
-
-};
+}
 
 
