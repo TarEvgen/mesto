@@ -40,4 +40,3 @@ export const initialCards = [
   export const jobInput = document.querySelector(".popup__input_type_data"); 
   export const cardsContainer = '.elements__list'; 
   export const inputTitle = document.querySelector('.popup__input_type_title');
-  export const inputLink = document.querySelector('.popup__input_type_link');

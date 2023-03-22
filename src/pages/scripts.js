@@ -8,7 +8,7 @@ import { initialCards, formsConfig,
          popupBtnOpenProfile, popupBtnOpenAddCard,
          profileForm, cardForm, nameInput, 
          jobInput, cardsContainer, inputTitle, 
-         inputLink } from '../components/initialCards.js'
+        } from '../utils/constants.js'
 
 const profileFormValidator = new FormValidator(formsConfig, profileForm);
 profileFormValidator.enableValidation();
@@ -39,10 +39,8 @@ const defaultCardList = new Section(
 defaultCardList.renderer();
 
 const popupCardForm = new PopupWithForm ({selectorPopup: '.popup_add-cards',
-  handleSubmitForm: () => {
-    const name = inputTitle.value;
-    const link = inputLink.value;
-    addClassCard ({name: name, link: link})
+  handleSubmitForm: (inputData) => {
+    defaultCardList.addItem (createCard ({name: inputData.title, link: inputData.link})); 
     cardForm.reset();
     cardFormValidator.inactiveButtonState();
   }
@@ -60,15 +58,12 @@ function openProfilePopup(selectorPopup) {
 const popupProfileForm = new PopupWithForm ({selectorPopup: '.popup_edit-profile',
   handleSubmitForm: (inputData) => {
     userInfo.setUserInfo ({
-      userLogin: nameInput.value,
-      userActivity: jobInput.value,
+      userLogin: inputData.user,
+      userActivity: inputData.activity
     });
-  }});
-popupProfileForm.setEventListeners()
+}});
 
-function addClassCard ({name: name, link: link}) { 
-  defaultCardList.addItem (createCard ({name: name, link: link})); 
-}
+popupProfileForm.setEventListeners()
 
 const userInfo = new UserInfo ({userLoginSelector: '.profile__login', 
   userActivitySelector: '.profile__activity'
