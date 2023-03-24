@@ -10,6 +10,7 @@ import { initialCards, formsConfig,
          jobInput, cardsContainer, inputTitle, 
         } from '../utils/constants.js'
 
+import "./index.css";
 const profileFormValidator = new FormValidator(formsConfig, profileForm);
 profileFormValidator.enableValidation();
 const cardFormValidator = new FormValidator(formsConfig, cardForm);

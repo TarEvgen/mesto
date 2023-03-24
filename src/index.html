@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Место</title>
-  <link rel="stylesheet" href="./pages/index.css">
 </head>
 <body class="body">
   <div class="page">
@@ -13,7 +12,7 @@
     </header>
     <main class="content">
       <section class="profile">
-        <img class="profile__avatar" src="./images/avatar.png" alt="фото профиля">
+        <img class="profile__avatar" src="<%=require('./images/avatar.png')%>" alt="фото профиля">
         <div class="profile__info">
           <h1 class="profile__login">Жак-Ив Кусто</h1>
           <p class="profile__activity">Исследователь океана</p>
@@ -71,6 +70,5 @@
       </li>
     </template>
   </div>
-  <script type="module" src="./pages/scripts.js"></script>
-</body>
+  </body>
 </html>
