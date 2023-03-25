@@ -16,14 +16,13 @@ profileFormValidator.enableValidation();
 const cardFormValidator = new FormValidator(formsConfig, cardForm);
 cardFormValidator.enableValidation();
 
-const handleCardClick = (name, link) => {
-  const popupWithImage = new PopupWithImage ('.popup_open-img');
-  popupWithImage.setEventListeners ();
-  popupWithImage.open({name, link}); 
-}
+const popupWithImage = new PopupWithImage ('.popup_open-img');
+popupWithImage.setEventListeners ();
 
 function createCard (item) {
-  const card = new Card(item, '.card_sample_place', handleCardClick);
+  const card = new Card(item, '.card_sample_place', { openImg:  (data) => {
+    popupWithImage.open(data.name, data.link);
+  }});
   const cardElemdent = card.generateCard();
   return cardElemdent;
 } 
@@ -31,20 +30,18 @@ function createCard (item) {
 const defaultCardList = new Section(
   {items: initialCards, 
     renderer: (item) => {
-      defaultCardList.renderCards (createCard (item))
+      defaultCardList.appendCard (createCard (item))
     }
   },
  cardsContainer
 );
 
-defaultCardList.renderer();
+defaultCardList.renderItems();
 
 const popupCardForm = new PopupWithForm ({selectorPopup: '.popup_add-cards',
   handleSubmitForm: (inputData) => {
     defaultCardList.addItem (createCard ({name: inputData.title, link: inputData.link})); 
-    cardForm.reset();
-    cardFormValidator.inactiveButtonState();
-  }
+   }
 });
 
 popupCardForm.setEventListeners();
@@ -55,6 +52,11 @@ function openProfilePopup(selectorPopup) {
   nameInput.value = dataUser.userLogin;
   jobInput.value = dataUser.userActivity; 
 } 
+
+function openCardForm() {
+  popupCardForm.open()
+  cardFormValidator.disableButton();
+}
 
 const popupProfileForm = new PopupWithForm ({selectorPopup: '.popup_edit-profile',
   handleSubmitForm: (inputData) => {
@@ -70,5 +72,5 @@ const userInfo = new UserInfo ({userLoginSelector: '.profile__login',
   userActivitySelector: '.profile__activity'
 });
 
-popupBtnOpenProfile.addEventListener("click", () => openProfilePopup('.popup_edit-profile'));
-popupBtnOpenAddCard.addEventListener("click", () => popupCardForm.open());
+popupBtnOpenProfile.addEventListener("click", () => openProfilePopup());
+popupBtnOpenAddCard.addEventListener("click", () => openCardForm());

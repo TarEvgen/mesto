@@ -7,7 +7,7 @@ export class PopupWithImage extends Popup {
       this._CardDataContent = this._popup.querySelector('.popup__description');
     }
 
-  open({name, link}) {
+  open(name, link) {
     super.open();
     this._cardDataLink.src = link;
     this._cardDataLink.alt = name;

@@ -1,9 +1,9 @@
 export class Card {
-  constructor(initialCards, templateSelector, handleCardClick) {
+  constructor(initialCards, templateSelector, {openImg}) {
     this._name = initialCards.name;
     this._link = initialCards.link;
     this._templateSelector = templateSelector; 
-    this._handleCardClick = handleCardClick;
+    this._openImg = openImg;
     this._element = this._getTemplate();
     this._imageElement = this._element.querySelector('.element__img');
     this._elementButtonLike = this._element.querySelector('.element__button');
@@ -47,7 +47,7 @@ export class Card {
   }
 
   _openPopupImg () {
-    this._handleCardClick(this._name, this._link);
+    this._openImg({name: this._name, link: this._link});
   }
 }
 

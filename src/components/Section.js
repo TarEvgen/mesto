@@ -5,11 +5,11 @@ export class Section {
     this._container = document.querySelector('.elements__list');
   }
 
-  renderer () {
+  renderItems () {
     this._renderedItems.forEach(item => this._renderer(item));
   }
  
-  renderCards (cardElemdent) {
+  appendCard (cardElemdent) {
     this._container.append(cardElemdent);
   }
 
