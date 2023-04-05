@@ -16,4 +16,9 @@ export class Section {
   addItem (cardElemdent) {
     this._container.prepend(cardElemdent);
   }
+
+/*saveCard () {
+
+}
+*/
 }

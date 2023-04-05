@@ -7,25 +7,46 @@ import { UserInfo } from '../components/UserInfo.js'
 import { Api } from '../components/Api.js'
 
 
-import { initialCards, formsConfig, 
+import {  formsConfig, 
          popupBtnOpenProfile, popupBtnOpenAddCard,
          profileForm, cardForm, nameInput, 
          jobInput, cardsContainer, inputTitle, 
         } from '../utils/constants.js'
 
 import "./index.css";
+let defaultCardList =[];
 
 const api = new Api ({
-  url: 'https://mesto.nomoreparties.co/v1/cohort-63/cards/',
+  url: 'https://mesto.nomoreparties.co/v1/cohort-63',
   headers: {
     'content-type': 'application/json',
     Authorization: 'dac2ff7d-9ecf-480c-a9f0-aeb4dc4991bc'
   }
 })
+///////////////////////////////////////////////
 
-const cards = api.getAllCards();
+/////////////////////
+/*
+const defaultCardList = new Section(
+  {items: initialCards, 
+    renderer: (item) => {
+      defaultCardList.appendCard (createCard (item))
+    }
+  },
+ cardsContainer
+);
+
+defaultCardList.renderItems();
+*/
+
+/////////////////////////////
+
+
+
+
+const cards = api.getAllCards()
 cards.then((data) => {
-  const defaultCardList = new Section(
+  defaultCardList = new Section(
   {items: data, 
     renderer: (item) => {
       defaultCardList.appendCard (createCard (item))
@@ -37,6 +58,27 @@ cards.then((data) => {
 defaultCardList.renderItems();
 })
 .catch((err) => alert(err))
+
+const dataUser = api.loadDataUser();
+dataUser.then((data) => {
+
+  
+
+  
+    userInfo.setUserInfo ({
+      userLogin: data.name,
+      userActivity: data.about, avatarLink: data.avatar})
+    
+
+  //jobInput.value = dataUser.userActivity; 
+
+
+  //console.log(data.avatar)
+})
+////////////////////////////////////////////
+
+
+
 
 
 const profileFormValidator = new FormValidator(formsConfig, profileForm);
@@ -68,7 +110,59 @@ defaultCardList.renderItems();
 */
 const popupCardForm = new PopupWithForm ({selectorPopup: '.popup_add-cards',
   handleSubmitForm: (inputData) => {
-    defaultCardList.addItem (createCard ({name: inputData.title, link: inputData.link})); 
+   
+  // api.addCard()
+   //console.log(api.addCard())
+   //console.log(j)
+//defaultCardList.addItem (createCard ({name: inputData.title, link: inputData.link})); 
+   api.addCard(inputData)
+   .then(res =>{
+/**/
+  
+
+   console.log(res)
+    
+    defaultCardList.addItem(createCard ({name: res.name, link: res.link}))
+    //createCard (console.log(res)/*{
+     // createCard ({name: res.title, link: res.link})
+     /* userLogin: res.name,
+      userActivity: res.about
+    })*/
+   
+  })
+  .catch((err) => alert(err))
+
+   /*.then(res =>{
+    userInfo.setUserInfo ({
+      userLogin: res.name,
+
+      .then(res =>{
+      userInfo.setUserInfo ({
+        userLogin: res.name,
+        userActivity: res.about
+      })
+     
+    })
+    .catch((err) => alert(err))
+    
+    
+
+
+
+
+
+
+      userActivity: res.about
+    })
+  })
+
+*/
+/*console.log('defaultCardList')*/
+   
+    //defaultCardList.addItem (createCard ({name: inputData.title, link: inputData.link})); 
+
+
+
    }
 });
 
@@ -86,18 +180,36 @@ function openCardForm() {
   cardFormValidator.disableButton();
 }
 
+
+///const r = api.editProfile()
+//console.log(r)
+
 const popupProfileForm = new PopupWithForm ({selectorPopup: '.popup_edit-profile',
   handleSubmitForm: (inputData) => {
-    userInfo.setUserInfo ({
+    //console.log(inputData, 'inputData')
+    /*userInfo.setUserInfo ({
       userLogin: inputData.user,
       userActivity: inputData.activity
-    });
+    });*/
+    api.editProfile(inputData)
+   .then(res =>{
+      userInfo.setUserInfo ({
+        userLogin: res.name,
+        userActivity: res.about
+      })
+     
+    })
+    .catch((err) => alert(err))
+    
+    
+
+
 }});
 
 popupProfileForm.setEventListeners()
 
 const userInfo = new UserInfo ({userLoginSelector: '.profile__login', 
-  userActivitySelector: '.profile__activity'
+  userActivitySelector: '.profile__activity', userAvatarSelector: '.profile__avatar'
 });
 
 popupBtnOpenProfile.addEventListener("click", () => openProfilePopup());
