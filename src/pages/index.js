@@ -5,6 +5,7 @@ import { PopupWithForm } from '../components/PopupWithForm.js'
 import { PopupWithImage } from '../components/PopupWithImage.js'
 import { UserInfo } from '../components/UserInfo.js'
 import { Api } from '../components/Api.js'
+import { PopupDeleteCard } from '../components/PopupDeleteCard.js'
 
 
 import {  formsConfig, 
@@ -60,21 +61,24 @@ defaultCardList.renderItems();
 .catch((err) => alert(err))
 
 const dataUser = api.loadDataUser();
-dataUser.then((data) => {
 
-  
 
-  
+
+
+
+dataUser
+.then((data) => {
+
     userInfo.setUserInfo ({
       userLogin: data.name,
-      userActivity: data.about, avatarLink: data.avatar})
-    
+      userActivity: data.about, 
+      avatarLink: data.avatar,
+      userId: data._id 
+      })
+   })
 
-  //jobInput.value = dataUser.userActivity; 
 
-
-  //console.log(data.avatar)
-})
+   
 ////////////////////////////////////////////
 
 
@@ -89,13 +93,27 @@ cardFormValidator.enableValidation();
 const popupWithImage = new PopupWithImage ('.popup_open-img');
 popupWithImage.setEventListeners ();
 
+const popupDeleteCard = new PopupDeleteCard ('.popup_delete-cards');
+popupDeleteCard.setEventListeners ();
 function createCard (item) {
+ console.log(dataUser)
+  const userId = userInfo.transferUserId()
+
   const card = new Card(item, '.card_sample_place', { openImg:  (data) => {
     popupWithImage.open(data.name, data.link);
-  }});
+  }, dcard}, userId);
+ 
   const cardElemdent = card.generateCard();
+ 
   return cardElemdent;
+
 } 
+
+const dcard = (element) =>{
+
+popupDeleteCard.openPopupDeleteCard(element)
+
+}
 /*
 const defaultCardList = new Section(
   {items: initialCards, 
@@ -120,9 +138,10 @@ const popupCardForm = new PopupWithForm ({selectorPopup: '.popup_add-cards',
 /**/
   
 
-   console.log(res)
+
     
     defaultCardList.addItem(createCard ({name: res.name, link: res.link}))
+    
     //createCard (console.log(res)/*{
      // createCard ({name: res.title, link: res.link})
      /* userLogin: res.name,
@@ -195,8 +214,10 @@ const popupProfileForm = new PopupWithForm ({selectorPopup: '.popup_edit-profile
    .then(res =>{
       userInfo.setUserInfo ({
         userLogin: res.name,
-        userActivity: res.about
+        userActivity: res.about,
+        
       })
+      
      
     })
     .catch((err) => alert(err))

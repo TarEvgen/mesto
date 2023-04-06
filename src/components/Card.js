@@ -1,12 +1,16 @@
 export class Card {
-  constructor(initialCards, templateSelector, {openImg}) {
+  constructor(initialCards, templateSelector, {openImg, dcard}, userId) {
     this._name = initialCards.name;
     this._link = initialCards.link;
+    this._idOwner = initialCards.owner._id
+    this._userId = userId
     this._templateSelector = templateSelector; 
     this._openImg = openImg;
+    this._deleteCard = dcard;
     this._element = this._getTemplate();
     this._imageElement = this._element.querySelector('.element__img');
-    this._elementButtonLike = this._element.querySelector('.element__button');
+    this._elementButtonLike = this._element.querySelector('.element__like-button');
+    this._elementDeleteCard = this._element.querySelector('.element__delete')
   }
 
   _getTemplate() {
@@ -20,6 +24,12 @@ export class Card {
 
   generateCard () {
     this._setEventListeners();
+    //console.log(this._idOwner, 'this._idOwner')
+    if(this._userId === this._idOwner) {
+      console.log("Есть карточки добавленные мной")
+      this._elementDeleteCard.classList.add('element__delete_active')
+
+    }
     this._element.querySelector('.element__title').textContent = this._name;
     this._imageElement.src = this._link;
     this._imageElement.alt = this._name;
@@ -28,7 +38,9 @@ export class Card {
 
   _setEventListeners() {
     this._element.querySelector('.element__delete').addEventListener('click',() => {
-      this._deleteCard();
+      //this._deleteCard();
+      this._openPopupDeleteCard ()
+
     });
     this._elementButtonLike.addEventListener('click',() => {
       this._likeCard();
@@ -37,10 +49,10 @@ export class Card {
       this._openPopupImg();
     })
   }
-
+/*
   _deleteCard() {
     this._element.remove();
-  }
+  }*/
 
   _likeCard() {
     this._elementButtonLike.classList.toggle("element__button_active");
@@ -49,6 +61,13 @@ export class Card {
   _openPopupImg () {
     this._openImg({name: this._name, link: this._link});
   }
+
+  _openPopupDeleteCard () {
+    this._deleteCard(this._element)
+    console.log(this._element,'нажал на удалить')
+  }
+
+
 }
 
 

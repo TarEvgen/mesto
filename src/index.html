@@ -61,12 +61,24 @@
         <button class="popup__close" type="button"></button>
       </div>
     </div>
+    <div class="popup popup_delete-cards">
+      <div class="popup__content">
+        <button class="popup__close" type="button"></button>
+        <h2 class="popup__title popup__title_delete-card">Вы уверены?</h2>
+        <form class="popup__form popup__form_delete-card" novalidate>
+          <button class="popup__save popup__save_create" type="button">Да</button>
+        </form>
+      </div>
+    </div>
     <template class="card card_sample_place">
       <li class="element">
         <img class="element__img">
         <button class="element__delete" type="button"></button>
         <h2 class="element__title"></h2>
-        <button class="element__button" type="button"></button>         
+        <div class="element__like">
+          <button class="element__like-button" type="button"></button>
+          <p class="element__like-counter">6</p>
+        </div>       
       </li>
     </template>
   </div>

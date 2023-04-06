@@ -11,6 +11,7 @@
     grid-area: 1/2;
     transition: opacity .7s;
     cursor: pointer;
+    visibility: hidden;
   }
 
 .element__delete:hover {
