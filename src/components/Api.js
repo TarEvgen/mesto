@@ -67,10 +67,26 @@ export class Api {
         return res.json();}
         return Promise.reject('Произошла ошибка')
       })
-
-
-
   }
+ 
+  deleteCard (cardId) {
+    console.log(cardId, 'cardId')
+    console.log(`${this._url}/cards/${cardId}`, 'cardId')
+    return fetch(`${this._url}/cards/${cardId}`,{
+      method: 'DELETE',
+      headers: this._headers
+    })
+    .then((res) =>{
+      // console.log(data);
+      if (res.ok) {
+        return res.json();}
+        return Promise.reject('Произошла ошибка')
+      })
+  }
+
+
+
+
 
 }
 

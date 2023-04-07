@@ -1,12 +1,17 @@
 export class Card {
-  constructor(initialCards, templateSelector, {openImg, dcard}, userId) {
+  constructor(initialCards, templateSelector, {openImg, openDeleteCard}, userId) {
     this._name = initialCards.name;
     this._link = initialCards.link;
+    this._likes = initialCards.likes;
+    console.log(this._likes.length, 'this._likes')
+
+    this._cardId = initialCards._id
+    console.log(initialCards._id, 'initialCards._id')
     this._idOwner = initialCards.owner._id
     this._userId = userId
     this._templateSelector = templateSelector; 
     this._openImg = openImg;
-    this._deleteCard = dcard;
+    this._deleteCard = openDeleteCard;
     this._element = this._getTemplate();
     this._imageElement = this._element.querySelector('.element__img');
     this._elementButtonLike = this._element.querySelector('.element__like-button');
@@ -33,6 +38,7 @@ export class Card {
     this._element.querySelector('.element__title').textContent = this._name;
     this._imageElement.src = this._link;
     this._imageElement.alt = this._name;
+    this._element.id = this._cardId
     return this._element;
   }
 
@@ -49,11 +55,11 @@ export class Card {
       this._openPopupImg();
     })
   }
-/*
-  _deleteCard() {
-    this._element.remove();
-  }*/
 
+  /*_deleteCard() {
+    this._element.remove();
+  }
+*/
   _likeCard() {
     this._elementButtonLike.classList.toggle("element__button_active");
   }

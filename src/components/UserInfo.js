@@ -14,7 +14,7 @@ export class UserInfo {
   setUserInfo ({userLogin, userActivity, avatarLink, userId}) {
     this._userLogin.textContent = userLogin;
     this._userActivity.textContent = userActivity;
-    this._avatarLink.src = avatarLink;
+    //this._avatarLink.src = avatarLink;
     this._userId = userId
     
    // console.log(userId, 'userId')

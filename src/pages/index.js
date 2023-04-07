@@ -93,27 +93,37 @@ cardFormValidator.enableValidation();
 const popupWithImage = new PopupWithImage ('.popup_open-img');
 popupWithImage.setEventListeners ();
 
-const popupDeleteCard = new PopupDeleteCard ('.popup_delete-cards');
-popupDeleteCard.setEventListeners ();
+const popupDeleteCard = new PopupDeleteCard ('.popup_delete-cards',
+{handleSubmitForm: (data)=>{api.deleteCard(popupDeleteCard.transferCardId(data).id)
+.then(()=>{
+  popupDeleteCard.transferCardId().remove()
+  popupDeleteCard.close ()
+})
+.catch((err) => alert(err))
+
+}});
+
+
 function createCard (item) {
  console.log(dataUser)
   const userId = userInfo.transferUserId()
 
   const card = new Card(item, '.card_sample_place', { openImg:  (data) => {
     popupWithImage.open(data.name, data.link);
-  }, dcard}, userId);
+  }, openDeleteCard: (data)=>{popupDeleteCard.openPopupDeleteCard(data);
+    popupDeleteCard.setEventListeners ();} }, userId);
  
   const cardElemdent = card.generateCard();
  
   return cardElemdent;
 
 } 
-
+/*
 const dcard = (element) =>{
 
-popupDeleteCard.openPopupDeleteCard(element)
 
-}
+
+}*/
 /*
 const defaultCardList = new Section(
   {items: initialCards, 
@@ -133,14 +143,26 @@ const popupCardForm = new PopupWithForm ({selectorPopup: '.popup_add-cards',
    //console.log(api.addCard())
    //console.log(j)
 //defaultCardList.addItem (createCard ({name: inputData.title, link: inputData.link})); 
+/*
+export const formsConfig = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input', 
+  submitButtonSelector: '.popup__save',
+  inputErrorClass: 'popup__input_type_error', 
+}
+*/
+
+
+const buttonSubmit = cardForm.querySelector(formsConfig.submitButtonSelector)
+buttonSubmit.textContent ='Сохранение...'
    api.addCard(inputData)
    .then(res =>{
 /**/
   
-
-
+//this.close();
+popupCardForm.close();
     
-    defaultCardList.addItem(createCard ({name: res.name, link: res.link}))
+    defaultCardList.addItem(createCard (res))
     
     //createCard (console.log(res)/*{
      // createCard ({name: res.title, link: res.link})
@@ -150,6 +172,7 @@ const popupCardForm = new PopupWithForm ({selectorPopup: '.popup_add-cards',
    
   })
   .catch((err) => alert(err))
+  .finally(()=> buttonSubmit.textContent ='Создать')
 
    /*.then(res =>{
     userInfo.setUserInfo ({
