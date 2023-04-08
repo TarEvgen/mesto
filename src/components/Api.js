@@ -85,6 +85,42 @@ export class Api {
   }
 
 
+  addLikes (cardId) {
+
+    return fetch(`${this._url}/cards/${cardId}/likes`,{
+
+      method: 'PUT',
+      headers: this._headers
+
+    })
+    .then((res) =>{
+      // console.log(data);
+      if (res.ok) {
+        return res.json();}
+        return Promise.reject('Произошла ошибка')
+      })
+
+  }
+
+
+  deleteLikes (cardId) {
+
+    return fetch(`${this._url}/cards/${cardId}/likes`,{
+
+      method: 'DELETE',
+      headers: this._headers
+
+    })
+    .then((res) =>{
+      console.log('сработал метод удалени лайка');
+      if (res.ok) {
+        return res.json();}
+        return Promise.reject('Произошла ошибка')
+      })
+
+  }
+  
+
 
 
 

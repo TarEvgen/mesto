@@ -24,51 +24,21 @@ const api = new Api ({
     Authorization: 'dac2ff7d-9ecf-480c-a9f0-aeb4dc4991bc'
   }
 })
-///////////////////////////////////////////////
-
-/////////////////////
-/*
-const defaultCardList = new Section(
-  {items: initialCards, 
-    renderer: (item) => {
-      defaultCardList.appendCard (createCard (item))
-    }
-  },
- cardsContainer
-);
-
-defaultCardList.renderItems();
-*/
-
-/////////////////////////////
-
-
-
 
 const cards = api.getAllCards()
-cards.then((data) => {
-  defaultCardList = new Section(
-  {items: data, 
-    renderer: (item) => {
-      defaultCardList.appendCard (createCard (item))
-    }
-  },
- cardsContainer
-);
-
-defaultCardList.renderItems();
+cards
+.then((data) => { defaultCardList = new Section({
+  items: data, 
+  renderer: (item) => { defaultCardList.appendCard (createCard (item))}},
+  cardsContainer
+  );
+  defaultCardList.renderItems();
 })
 .catch((err) => alert(err))
 
 const dataUser = api.loadDataUser();
-
-
-
-
-
 dataUser
 .then((data) => {
-
     userInfo.setUserInfo ({
       userLogin: data.name,
       userActivity: data.about, 
@@ -76,6 +46,7 @@ dataUser
       userId: data._id 
       })
    })
+.catch((err) => alert(err))
 
 
    
@@ -111,7 +82,26 @@ function createCard (item) {
   const card = new Card(item, '.card_sample_place', { openImg:  (data) => {
     popupWithImage.open(data.name, data.link);
   }, openDeleteCard: (data)=>{popupDeleteCard.openPopupDeleteCard(data);
-    popupDeleteCard.setEventListeners ();} }, userId);
+    popupDeleteCard.setEventListeners ();}, addLike: (cardId) =>{api.addLikes(cardId)
+      .then(res =>{
+        console.log(res.likes, 'лайк встал')
+        card.toggleLikeUser (res.likes)
+
+          })
+          .catch((err) => alert(err))
+    
+    
+    
+    }, deleteLike: (cardId) => {api.deleteLikes(cardId)
+    
+      .then(res =>{
+        console.log(res, 'лайк ушел')
+        card.toggleLikeUser (res.likes)
+          })
+          .catch((err) => alert(err))
+    
+    
+    } }, userId);
  
   const cardElemdent = card.generateCard();
  
@@ -233,6 +223,20 @@ const popupProfileForm = new PopupWithForm ({selectorPopup: '.popup_edit-profile
       userLogin: inputData.user,
       userActivity: inputData.activity
     });*/
+/*
+export const formsConfig = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input', 
+  submitButtonSelector: '.popup__save',
+  inputErrorClass: 'popup__input_type_error', 
+}
+*/
+
+
+const buttonSubmit2 = profileForm.querySelector(formsConfig.submitButtonSelector)
+
+
+buttonSubmit2.textContent ='Сохранение...'
     api.editProfile(inputData)
    .then(res =>{
       userInfo.setUserInfo ({
