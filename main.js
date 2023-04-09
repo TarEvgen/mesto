@@ -1,11 +1,3 @@
-/*
- * ATTENTION: The "eval" devtool has been used (maybe by default in mode: "development").
- * This devtool is neither made for production nor for readable output files.
- * It uses "eval()" calls to create a separate source file in the browser devtools.
- * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
- * or disable the default devtool with "devtool: false".
- * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
- */
 /******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
@@ -16,7 +8,107 @@
   \*******************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"Api\": () => (/* binding */ Api)\n/* harmony export */ });\nclass Api {\n  constructor(config) {\n    this._url = config.url;\n    this._headers = config.headers;\n  }\n  getAllCards() {\n    return fetch(`${this._url}/cards`, {\n      method: 'GET',\n      headers: this._headers\n    }).then(res => {\n      // console.log(res.json());\n      if (res.ok) {\n        return res.json();\n      }\n      return Promise.reject('Произошла ошибка');\n    });\n  }\n  loadDataUser() {\n    return fetch(`${this._url}/users/me`, {\n      method: 'GET',\n      headers: this._headers\n    }).then(res => {\n      // console.log(res.json());\n      if (res.ok) {\n        return res.json();\n      }\n      return Promise.reject('Произошла ошибка');\n    });\n  }\n  editProfile(inputData) {\n    return fetch(`${this._url}/users/me`, {\n      method: 'PATCH',\n      headers: this._headers,\n      body: JSON.stringify({\n        name: inputData.user,\n        about: inputData.activity\n      })\n    }).then(res => {\n      // console.log(res.json());\n      if (res.ok) {\n        return res.json();\n      }\n      return Promise.reject('Произошла ошибка');\n    });\n  }\n  addCard(data) {\n    return fetch(`${this._url}/cards`, {\n      method: 'POST',\n      headers: this._headers,\n      body: JSON.stringify({\n        name: data.title,\n        link: data.link\n      })\n    }).then(res => {\n      // console.log(data);\n      if (res.ok) {\n        return res.json();\n      }\n      return Promise.reject('Произошла ошибка');\n    });\n  }\n}\n\n/*fetch('https://mesto.nomoreparties.co/v1/cohort-63/cards', {\r\n  headers: {\r\n    authorization: 'dac2ff7d-9ecf-480c-a9f0-aeb4dc4991bc'\r\n  }\r\n})\r\n  .then(res => res.json())\r\n  .then((result) => {\r\n    console.log(result);\r\n  }); */\n\n//# sourceURL=webpack://mesto/./src/components/Api.js?");
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Api": () => (/* binding */ Api)
+/* harmony export */ });
+class Api {
+  constructor(config) {
+    this._url = config.url;
+    this._headers = config.headers;
+  }
+  getAllCards() {
+    return fetch(`${this._url}/cards`, {
+      method: 'GET',
+      headers: this._headers
+    }).then(res => {
+      return this._checkRes(res);
+    });
+  }
+  loadDataUser() {
+    return fetch(`${this._url}/users/me`, {
+      method: 'GET',
+      headers: this._headers
+    }).then(res => {
+      return this._checkRes(res);
+    });
+  }
+  editProfile(inputData) {
+    return fetch(`${this._url}/users/me`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: inputData.user,
+        about: inputData.activity
+      })
+    }).then(res => {
+      return this._checkRes(res);
+    });
+  }
+  updataAvatar(inputData) {
+    return fetch(`${this._url}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: inputData
+      })
+    }).then(res => {
+      return this._checkRes(res);
+    });
+  }
+  addCard(data) {
+    return fetch(`${this._url}/cards`, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: data.title,
+        link: data.link
+      })
+    }).then(res => {
+      return this._checkRes(res);
+    });
+  }
+  deleteCard(cardId) {
+    return fetch(`${this._url}/cards/${cardId}`, {
+      method: 'DELETE',
+      headers: this._headers
+    }).then(res => {
+      return this._checkRes(res);
+    });
+  }
+  addLikes(cardId) {
+    return fetch(`${this._url}/cards/${cardId}/likes`, {
+      method: 'PUT',
+      headers: this._headers
+    }).then(res => {
+      return this._checkRes(res);
+    });
+  }
+  deleteLikes(cardId) {
+    return fetch(`${this._url}/cards/${cardId}/likes`, {
+      method: 'DELETE',
+      headers: this._headers
+    }).then(res => {
+      return this._checkRes(res);
+    });
+  }
+  _checkRes(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject('Произошла ошибка');
+  }
+}
+
+/*fetch('https://mesto.nomoreparties.co/v1/cohort-63/cards', {
+  headers: {
+    authorization: 'dac2ff7d-9ecf-480c-a9f0-aeb4dc4991bc'
+  }
+})
+  .then(res => res.json())
+  .then((result) => {
+    console.log(result);
+  }); */
 
 /***/ }),
 
@@ -26,7 +118,96 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"Card\": () => (/* binding */ Card)\n/* harmony export */ });\nclass Card {\n  constructor(initialCards, templateSelector, {\n    openImg,\n    dcard\n  }, userId) {\n    this._name = initialCards.name;\n    this._link = initialCards.link;\n    this._idOwner = initialCards.owner._id;\n    this._userId = userId;\n    this._templateSelector = templateSelector;\n    this._openImg = openImg;\n    this._deleteCard = dcard;\n    this._element = this._getTemplate();\n    this._imageElement = this._element.querySelector('.element__img');\n    this._elementButtonLike = this._element.querySelector('.element__like-button');\n    this._elementDeleteCard = this._element.querySelector('.element__delete');\n  }\n  _getTemplate() {\n    const cardElement = document.querySelector(this._templateSelector).content.querySelector('.element').cloneNode(true);\n    return cardElement;\n  }\n  generateCard() {\n    this._setEventListeners();\n    //console.log(this._idOwner, 'this._idOwner')\n    if (this._userId === this._idOwner) {\n      console.log(\"Есть карточки добавленные мной\");\n      this._elementDeleteCard.classList.add('element__delete_active');\n    }\n    this._element.querySelector('.element__title').textContent = this._name;\n    this._imageElement.src = this._link;\n    this._imageElement.alt = this._name;\n    return this._element;\n  }\n  _setEventListeners() {\n    this._element.querySelector('.element__delete').addEventListener('click', () => {\n      //this._deleteCard();\n      this._openPopupDeleteCard();\n    });\n    this._elementButtonLike.addEventListener('click', () => {\n      this._likeCard();\n    });\n    this._imageElement.addEventListener('click', () => {\n      this._openPopupImg();\n    });\n  }\n  /*\r\n    _deleteCard() {\r\n      this._element.remove();\r\n    }*/\n\n  _likeCard() {\n    this._elementButtonLike.classList.toggle(\"element__button_active\");\n  }\n  _openPopupImg() {\n    this._openImg({\n      name: this._name,\n      link: this._link\n    });\n  }\n  _openPopupDeleteCard() {\n    this._deleteCard(this._element);\n    console.log(this._element, 'нажал на удалить');\n  }\n}\n\n//# sourceURL=webpack://mesto/./src/components/Card.js?");
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Card": () => (/* binding */ Card)
+/* harmony export */ });
+class Card {
+  constructor(initialCards, templateSelector, {
+    openImg,
+    openDeleteCard,
+    addLike,
+    deleteLike
+  }, userId) {
+    this._name = initialCards.name;
+    this._link = initialCards.link;
+    this._likes = initialCards.likes;
+    this._cardId = initialCards._id;
+    this._idOwner = initialCards.owner._id;
+    this._userId = userId;
+    this._templateSelector = templateSelector;
+    this._openImg = openImg;
+    this._deleteCard = openDeleteCard;
+    this._element = this._getTemplate();
+    this._imageElement = this._element.querySelector('.element__img');
+    this._elementButtonLike = this._element.querySelector('.element__like-button');
+    this._elementDeleteCard = this._element.querySelector('.element__delete');
+    this._likesСounter = this._element.querySelector('.element__like-counter');
+    this._addLikeCard = addLike;
+    this._deleteLike = deleteLike;
+  }
+  _getTemplate() {
+    const cardElement = document.querySelector(this._templateSelector).content.querySelector('.element').cloneNode(true);
+    return cardElement;
+  }
+  generateCard() {
+    this._setEventListeners();
+    if (this._userId === this._idOwner) {
+      this._elementDeleteCard.classList.add('element__delete_active');
+    }
+    this._element.querySelector('.element__title').textContent = this._name;
+    this._imageElement.src = this._link;
+    this._imageElement.alt = this._name;
+    this._element.id = this._cardId;
+    this._countLikes();
+    return this._element;
+  }
+  _setEventListeners() {
+    this._element.querySelector('.element__delete').addEventListener('click', () => {
+      this._openPopupDeleteCard();
+    });
+    this._elementButtonLike.addEventListener('click', () => {
+      this._setlike();
+    });
+    this._imageElement.addEventListener('click', () => {
+      this._openPopupImg();
+    });
+  }
+  _setlike() {
+    if (this._checkLikeUser()) {
+      this._deleteLike(this._cardId);
+    } else {
+      this._addLikeCard(this._cardId);
+    }
+  }
+  _openPopupImg() {
+    this._openImg({
+      name: this._name,
+      link: this._link
+    });
+  }
+  _openPopupDeleteCard() {
+    this._deleteCard(this._element);
+  }
+  toggleLikeUser(likes) {
+    this._likes = likes;
+    this._countLikes();
+  }
+  _countLikes() {
+    this._likesСounter.textContent = this._likes.length;
+    this._setButtonStatus();
+  }
+  _checkLikeUser() {
+    return this._likes.some(likes => likes._id === this._userId);
+  }
+  _setButtonStatus() {
+    if (this._checkLikeUser() === true) {
+      this._elementButtonLike.classList.add("element__button_active");
+    } else {
+      this._elementButtonLike.classList.remove("element__button_active");
+    }
+  }
+}
 
 /***/ }),
 
@@ -36,7 +217,62 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \*****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"FormValidator\": () => (/* binding */ FormValidator)\n/* harmony export */ });\nclass FormValidator {\n  constructor(formsConfig, PopupForm) {\n    this._PopupForm = PopupForm;\n    this._formsConfig = formsConfig;\n    this._buttonElement = this._PopupForm.querySelector(this._formsConfig.submitButtonSelector);\n    this._inputList = Array.from(this._PopupForm.querySelectorAll(this._formsConfig.inputSelector));\n  }\n  _toggleButtonState() {\n    if (this._hasInvalidInput()) {\n      this.disableButton();\n    } else {\n      this._buttonElement.removeAttribute('disabled');\n    }\n  }\n  _hasInvalidInput() {\n    return this._inputList.some(inputElement => {\n      return !inputElement.validity.valid;\n    });\n  }\n  disableButton() {\n    this._buttonElement.setAttribute('disabled', 'disabled');\n  }\n  _checkInputValidity(inputElement) {\n    if (!inputElement.validity.valid) {\n      this._showInputError(inputElement, inputElement.validationMessage);\n    } else {\n      this._hideInputError(inputElement);\n    }\n  }\n  _showInputError(inputElement, errorMessage) {\n    const errorElement = this._PopupForm.querySelector(`.${inputElement.id}-error`);\n    inputElement.classList.add(this._formsConfig.inputErrorClass);\n    errorElement.textContent = errorMessage;\n  }\n  _hideInputError(inputElement) {\n    const errorElement = this._PopupForm.querySelector(`.${inputElement.id}-error`);\n    inputElement.classList.remove(this._formsConfig.inputErrorClass);\n    errorElement.textContent = '';\n  }\n  _setEventListeners() {\n    this._toggleButtonState();\n    this._inputList.forEach(inputElement => {\n      inputElement.addEventListener('input', () => {\n        this._checkInputValidity(inputElement);\n        this._toggleButtonState();\n      });\n    });\n  }\n  enableValidation() {\n    this._setEventListeners();\n  }\n}\n\n//# sourceURL=webpack://mesto/./src/components/FormValidator.js?");
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FormValidator": () => (/* binding */ FormValidator)
+/* harmony export */ });
+class FormValidator {
+  constructor(formsConfig, PopupForm) {
+    this._PopupForm = PopupForm;
+    this._formsConfig = formsConfig;
+    this._buttonElement = this._PopupForm.querySelector(this._formsConfig.submitButtonSelector);
+    this._inputList = Array.from(this._PopupForm.querySelectorAll(this._formsConfig.inputSelector));
+  }
+  _toggleButtonState() {
+    if (this._hasInvalidInput()) {
+      this.disableButton();
+    } else {
+      this._buttonElement.removeAttribute('disabled');
+    }
+  }
+  _hasInvalidInput() {
+    return this._inputList.some(inputElement => {
+      return !inputElement.validity.valid;
+    });
+  }
+  disableButton() {
+    this._buttonElement.setAttribute('disabled', 'disabled');
+  }
+  _checkInputValidity(inputElement) {
+    if (!inputElement.validity.valid) {
+      this._showInputError(inputElement, inputElement.validationMessage);
+    } else {
+      this._hideInputError(inputElement);
+    }
+  }
+  _showInputError(inputElement, errorMessage) {
+    const errorElement = this._PopupForm.querySelector(`.${inputElement.id}-error`);
+    inputElement.classList.add(this._formsConfig.inputErrorClass);
+    errorElement.textContent = errorMessage;
+  }
+  _hideInputError(inputElement) {
+    const errorElement = this._PopupForm.querySelector(`.${inputElement.id}-error`);
+    inputElement.classList.remove(this._formsConfig.inputErrorClass);
+    errorElement.textContent = '';
+  }
+  _setEventListeners() {
+    this._toggleButtonState();
+    this._inputList.forEach(inputElement => {
+      inputElement.addEventListener('input', () => {
+        this._checkInputValidity(inputElement);
+        this._toggleButtonState();
+      });
+    });
+  }
+  enableValidation() {
+    this._setEventListeners();
+  }
+}
 
 /***/ }),
 
@@ -46,7 +282,35 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \*********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"Popup\": () => (/* binding */ Popup)\n/* harmony export */ });\nclass Popup {\n  constructor(selectorPopup) {\n    this._popup = document.querySelector(selectorPopup);\n  }\n  open() {\n    this._popup.classList.add('popup_opened');\n    document.addEventListener('keydown', this._handleEscClose);\n  }\n  close() {\n    this._popup.classList.remove('popup_opened');\n    document.removeEventListener('keydown', this._handleEscClose);\n  }\n  _handleEscClose = evt => {\n    if (evt.key === 'Escape') {\n      this.close();\n    }\n  };\n  setEventListeners() {\n    this._popup.addEventListener('mousedown', evt => {\n      if (evt.target.classList.contains('popup__close') || evt.target === evt.currentTarget) {\n        this.close();\n      }\n    });\n  }\n}\n\n//# sourceURL=webpack://mesto/./src/components/Popup.js?");
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Popup": () => (/* binding */ Popup)
+/* harmony export */ });
+class Popup {
+  constructor(selectorPopup) {
+    this._popup = document.querySelector(selectorPopup);
+  }
+  open() {
+    this._popup.classList.add('popup_opened');
+    document.addEventListener('keydown', this._handleEscClose);
+  }
+  close() {
+    this._popup.classList.remove('popup_opened');
+    document.removeEventListener('keydown', this._handleEscClose);
+  }
+  _handleEscClose = evt => {
+    if (evt.key === 'Escape') {
+      this.close();
+    }
+  };
+  setEventListeners() {
+    this._popup.addEventListener('mousedown', evt => {
+      if (evt.target.classList.contains('popup__close') || evt.target === evt.currentTarget) {
+        this.close();
+      }
+    });
+  }
+}
 
 /***/ }),
 
@@ -56,7 +320,35 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \*******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"PopupDeleteCard\": () => (/* binding */ PopupDeleteCard)\n/* harmony export */ });\n/* harmony import */ var _components_Popup_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/Popup.js */ \"./src/components/Popup.js\");\n\nclass PopupDeleteCard extends _components_Popup_js__WEBPACK_IMPORTED_MODULE_0__.Popup {\n  constructor(selectorPopup) {\n    super(selectorPopup);\n  }\n  openPopupDeleteCard() {\n    super.open();\n  }\n}\n\n//# sourceURL=webpack://mesto/./src/components/PopupDeleteCard.js?");
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PopupDeleteCard": () => (/* binding */ PopupDeleteCard)
+/* harmony export */ });
+/* harmony import */ var _components_Popup_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/Popup.js */ "./src/components/Popup.js");
+
+class PopupDeleteCard extends _components_Popup_js__WEBPACK_IMPORTED_MODULE_0__.Popup {
+  constructor(selectorPopup, {
+    handleSubmitForm
+  }) {
+    super(selectorPopup);
+    this._form = this._popup.querySelector('.popup__form');
+    this._handleSubmitForm = handleSubmitForm;
+  }
+  openPopupDeleteCard(card) {
+    super.open();
+    this._card = card;
+  }
+  setEventListeners() {
+    super.setEventListeners();
+    this._form.addEventListener('submit', evt => {
+      evt.preventDefault();
+      this._handleSubmitForm();
+    });
+  }
+  transferCardId() {
+    return this._card;
+  }
+}
 
 /***/ }),
 
@@ -66,7 +358,39 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \*****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"PopupWithForm\": () => (/* binding */ PopupWithForm)\n/* harmony export */ });\n/* harmony import */ var _components_Popup_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/Popup.js */ \"./src/components/Popup.js\");\n\nclass PopupWithForm extends _components_Popup_js__WEBPACK_IMPORTED_MODULE_0__.Popup {\n  constructor({\n    selectorPopup,\n    handleSubmitForm\n  }) {\n    super(selectorPopup);\n    this._handleSubmitForm = handleSubmitForm;\n    this._form = this._popup.querySelector('.popup__form');\n    this._inputList = this._popup.querySelectorAll('.popup__input');\n  }\n  _getInputValues() {\n    this._inputValue = {};\n    this._inputList.forEach(input => this._inputValue[input.name] = input.value);\n    return this._inputValue;\n  }\n  setEventListeners() {\n    super.setEventListeners();\n    this._form.addEventListener('submit', evt => {\n      evt.preventDefault();\n      this._handleSubmitForm(this._getInputValues());\n      this.close();\n    });\n  }\n  close() {\n    super.close();\n    this._form.reset();\n  }\n}\n\n//# sourceURL=webpack://mesto/./src/components/PopupWithForm.js?");
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PopupWithForm": () => (/* binding */ PopupWithForm)
+/* harmony export */ });
+/* harmony import */ var _components_Popup_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/Popup.js */ "./src/components/Popup.js");
+
+class PopupWithForm extends _components_Popup_js__WEBPACK_IMPORTED_MODULE_0__.Popup {
+  constructor({
+    selectorPopup,
+    handleSubmitForm
+  }) {
+    super(selectorPopup);
+    this._handleSubmitForm = handleSubmitForm;
+    this._form = this._popup.querySelector('.popup__form');
+    this._inputList = this._popup.querySelectorAll('.popup__input');
+  }
+  _getInputValues() {
+    this._inputValue = {};
+    this._inputList.forEach(input => this._inputValue[input.name] = input.value);
+    return this._inputValue;
+  }
+  setEventListeners() {
+    super.setEventListeners();
+    this._form.addEventListener('submit', evt => {
+      evt.preventDefault();
+      this._handleSubmitForm(this._getInputValues());
+    });
+  }
+  close() {
+    super.close();
+    this._form.reset();
+  }
+}
 
 /***/ }),
 
@@ -76,7 +400,25 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"PopupWithImage\": () => (/* binding */ PopupWithImage)\n/* harmony export */ });\n/* harmony import */ var _components_Popup_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/Popup.js */ \"./src/components/Popup.js\");\n\nclass PopupWithImage extends _components_Popup_js__WEBPACK_IMPORTED_MODULE_0__.Popup {\n  constructor(selectorPopup) {\n    super(selectorPopup);\n    this._cardDataLink = this._popup.querySelector('.popup__img');\n    this._cardDataContent = this._popup.querySelector('.popup__description');\n  }\n  open(name, link) {\n    super.open();\n    this._cardDataLink.src = link;\n    this._cardDataLink.alt = name;\n    this._cardDataContent.textContent = name;\n  }\n}\n\n//# sourceURL=webpack://mesto/./src/components/PopupWithImage.js?");
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PopupWithImage": () => (/* binding */ PopupWithImage)
+/* harmony export */ });
+/* harmony import */ var _components_Popup_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/Popup.js */ "./src/components/Popup.js");
+
+class PopupWithImage extends _components_Popup_js__WEBPACK_IMPORTED_MODULE_0__.Popup {
+  constructor(selectorPopup) {
+    super(selectorPopup);
+    this._cardDataLink = this._popup.querySelector('.popup__img');
+    this._cardDataContent = this._popup.querySelector('.popup__description');
+  }
+  open(name, link) {
+    super.open();
+    this._cardDataLink.src = link;
+    this._cardDataLink.alt = name;
+    this._cardDataContent.textContent = name;
+  }
+}
 
 /***/ }),
 
@@ -86,7 +428,29 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \***********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"Section\": () => (/* binding */ Section)\n/* harmony export */ });\nclass Section {\n  constructor({\n    items,\n    renderer\n  }) {\n    this._renderedItems = items;\n    this._renderer = renderer;\n    this._container = document.querySelector('.elements__list');\n  }\n  renderItems() {\n    this._renderedItems.forEach(item => this._renderer(item));\n  }\n  appendCard(cardElemdent) {\n    this._container.append(cardElemdent);\n  }\n  addItem(cardElemdent) {\n    this._container.prepend(cardElemdent);\n  }\n\n  /*saveCard () {\r\n  \r\n  }\r\n  */\n}\n\n//# sourceURL=webpack://mesto/./src/components/Section.js?");
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Section": () => (/* binding */ Section)
+/* harmony export */ });
+class Section {
+  constructor({
+    items,
+    renderer
+  }) {
+    this._renderedItems = items;
+    this._renderer = renderer;
+    this._container = document.querySelector('.elements__list');
+  }
+  renderItems() {
+    this._renderedItems.forEach(item => this._renderer(item));
+  }
+  appendCard(cardElemdent) {
+    this._container.append(cardElemdent);
+  }
+  addItem(cardElemdent) {
+    this._container.prepend(cardElemdent);
+  }
+}
 
 /***/ }),
 
@@ -96,17 +460,45 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"UserInfo\": () => (/* binding */ UserInfo)\n/* harmony export */ });\nclass UserInfo {\n  constructor({\n    userLoginSelector,\n    userActivitySelector,\n    userAvatarSelector\n  }) {\n    this._userLogin = document.querySelector(userLoginSelector);\n    this._userActivity = document.querySelector(userActivitySelector);\n    this._avatarLink = document.querySelector(userAvatarSelector);\n    this._userId = null;\n  }\n  getUserInfo() {\n    return {\n      userLogin: this._userLogin.textContent,\n      userActivity: this._userActivity.textContent\n    };\n  }\n  setUserInfo({\n    userLogin,\n    userActivity,\n    avatarLink,\n    userId\n  }) {\n    this._userLogin.textContent = userLogin;\n    this._userActivity.textContent = userActivity;\n    this._avatarLink.src = avatarLink;\n    this._userId = userId;\n\n    // console.log(userId, 'userId')\n  }\n\n  transferUserId() {\n    return this._userId;\n  }\n}\n\n//# sourceURL=webpack://mesto/./src/components/UserInfo.js?");
-
-/***/ }),
-
-/***/ "./src/pages/index.js":
-/*!****************************!*\
-  !*** ./src/pages/index.js ***!
-  \****************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _components_Card_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/Card.js */ \"./src/components/Card.js\");\n/* harmony import */ var _components_FormValidator_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/FormValidator.js */ \"./src/components/FormValidator.js\");\n/* harmony import */ var _components_Section_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Section.js */ \"./src/components/Section.js\");\n/* harmony import */ var _components_PopupWithForm_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/PopupWithForm.js */ \"./src/components/PopupWithForm.js\");\n/* harmony import */ var _components_PopupWithImage_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/PopupWithImage.js */ \"./src/components/PopupWithImage.js\");\n/* harmony import */ var _components_UserInfo_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/UserInfo.js */ \"./src/components/UserInfo.js\");\n/* harmony import */ var _components_Api_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/Api.js */ \"./src/components/Api.js\");\n/* harmony import */ var _components_PopupDeleteCard_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/PopupDeleteCard.js */ \"./src/components/PopupDeleteCard.js\");\n/* harmony import */ var _utils_constants_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../utils/constants.js */ \"./src/utils/constants.js\");\n/* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./index.css */ \"./src/pages/index.css\");\n\n\n\n\n\n\n\n\n\n\nlet defaultCardList = [];\nconst api = new _components_Api_js__WEBPACK_IMPORTED_MODULE_6__.Api({\n  url: 'https://mesto.nomoreparties.co/v1/cohort-63',\n  headers: {\n    'content-type': 'application/json',\n    Authorization: 'dac2ff7d-9ecf-480c-a9f0-aeb4dc4991bc'\n  }\n});\n///////////////////////////////////////////////\n\n/////////////////////\n/*\r\nconst defaultCardList = new Section(\r\n  {items: initialCards, \r\n    renderer: (item) => {\r\n      defaultCardList.appendCard (createCard (item))\r\n    }\r\n  },\r\n cardsContainer\r\n);\r\n\r\ndefaultCardList.renderItems();\r\n*/\n\n/////////////////////////////\n\nconst cards = api.getAllCards();\ncards.then(data => {\n  defaultCardList = new _components_Section_js__WEBPACK_IMPORTED_MODULE_2__.Section({\n    items: data,\n    renderer: item => {\n      defaultCardList.appendCard(createCard(item));\n    }\n  }, _utils_constants_js__WEBPACK_IMPORTED_MODULE_8__.cardsContainer);\n  defaultCardList.renderItems();\n}).catch(err => alert(err));\nconst dataUser = api.loadDataUser();\ndataUser.then(data => {\n  userInfo.setUserInfo({\n    userLogin: data.name,\n    userActivity: data.about,\n    avatarLink: data.avatar,\n    userId: data._id\n  });\n});\n\n////////////////////////////////////////////\n\nconst profileFormValidator = new _components_FormValidator_js__WEBPACK_IMPORTED_MODULE_1__.FormValidator(_utils_constants_js__WEBPACK_IMPORTED_MODULE_8__.formsConfig, _utils_constants_js__WEBPACK_IMPORTED_MODULE_8__.profileForm);\nprofileFormValidator.enableValidation();\nconst cardFormValidator = new _components_FormValidator_js__WEBPACK_IMPORTED_MODULE_1__.FormValidator(_utils_constants_js__WEBPACK_IMPORTED_MODULE_8__.formsConfig, _utils_constants_js__WEBPACK_IMPORTED_MODULE_8__.cardForm);\ncardFormValidator.enableValidation();\nconst popupWithImage = new _components_PopupWithImage_js__WEBPACK_IMPORTED_MODULE_4__.PopupWithImage('.popup_open-img');\npopupWithImage.setEventListeners();\nconst popupDeleteCard = new _components_PopupDeleteCard_js__WEBPACK_IMPORTED_MODULE_7__.PopupDeleteCard('.popup_delete-cards');\npopupDeleteCard.setEventListeners();\nfunction createCard(item) {\n  console.log(dataUser);\n  const userId = userInfo.transferUserId();\n  const card = new _components_Card_js__WEBPACK_IMPORTED_MODULE_0__.Card(item, '.card_sample_place', {\n    openImg: data => {\n      popupWithImage.open(data.name, data.link);\n    },\n    dcard\n  }, userId);\n  const cardElemdent = card.generateCard();\n  return cardElemdent;\n}\nconst dcard = element => {\n  popupDeleteCard.openPopupDeleteCard(element);\n};\n/*\r\nconst defaultCardList = new Section(\r\n  {items: initialCards, \r\n    renderer: (item) => {\r\n      defaultCardList.appendCard (createCard (item))\r\n    }\r\n  },\r\n cardsContainer\r\n);\r\n\r\ndefaultCardList.renderItems();\r\n*/\nconst popupCardForm = new _components_PopupWithForm_js__WEBPACK_IMPORTED_MODULE_3__.PopupWithForm({\n  selectorPopup: '.popup_add-cards',\n  handleSubmitForm: inputData => {\n    // api.addCard()\n    //console.log(api.addCard())\n    //console.log(j)\n    //defaultCardList.addItem (createCard ({name: inputData.title, link: inputData.link})); \n    api.addCard(inputData).then(res => {\n      /**/\n\n      defaultCardList.addItem(createCard({\n        name: res.name,\n        link: res.link\n      }));\n\n      //createCard (console.log(res)/*{\n      // createCard ({name: res.title, link: res.link})\n      /* userLogin: res.name,\r\n       userActivity: res.about\r\n      })*/\n    }).catch(err => alert(err));\n\n    /*.then(res =>{\r\n     userInfo.setUserInfo ({\r\n       userLogin: res.name,\r\n         .then(res =>{\r\n       userInfo.setUserInfo ({\r\n         userLogin: res.name,\r\n         userActivity: res.about\r\n       })\r\n      \r\n     })\r\n     .catch((err) => alert(err))\r\n     \r\n     \r\n    \n    \n    \n       userActivity: res.about\r\n     })\r\n    })\r\n    */\n    /*console.log('defaultCardList')*/\n\n    //defaultCardList.addItem (createCard ({name: inputData.title, link: inputData.link})); \n  }\n});\n\npopupCardForm.setEventListeners();\nfunction openProfilePopup(selectorPopup) {\n  popupProfileForm.open();\n  const dataUser = userInfo.getUserInfo();\n  _utils_constants_js__WEBPACK_IMPORTED_MODULE_8__.nameInput.value = dataUser.userLogin;\n  _utils_constants_js__WEBPACK_IMPORTED_MODULE_8__.jobInput.value = dataUser.userActivity;\n}\nfunction openCardForm() {\n  popupCardForm.open();\n  cardFormValidator.disableButton();\n}\n\n///const r = api.editProfile()\n//console.log(r)\n\nconst popupProfileForm = new _components_PopupWithForm_js__WEBPACK_IMPORTED_MODULE_3__.PopupWithForm({\n  selectorPopup: '.popup_edit-profile',\n  handleSubmitForm: inputData => {\n    //console.log(inputData, 'inputData')\n    /*userInfo.setUserInfo ({\r\n      userLogin: inputData.user,\r\n      userActivity: inputData.activity\r\n    });*/\n    api.editProfile(inputData).then(res => {\n      userInfo.setUserInfo({\n        userLogin: res.name,\n        userActivity: res.about\n      });\n    }).catch(err => alert(err));\n  }\n});\npopupProfileForm.setEventListeners();\nconst userInfo = new _components_UserInfo_js__WEBPACK_IMPORTED_MODULE_5__.UserInfo({\n  userLoginSelector: '.profile__login',\n  userActivitySelector: '.profile__activity',\n  userAvatarSelector: '.profile__avatar'\n});\n_utils_constants_js__WEBPACK_IMPORTED_MODULE_8__.popupBtnOpenProfile.addEventListener(\"click\", () => openProfilePopup());\n_utils_constants_js__WEBPACK_IMPORTED_MODULE_8__.popupBtnOpenAddCard.addEventListener(\"click\", () => openCardForm());\n\n/*\r\nfetch('https://mesto.nomoreparties.co/v1/cohort-63/cards', {\r\n  headers: {\r\n    authorization: 'dac2ff7d-9ecf-480c-a9f0-aeb4dc4991bc'\r\n  }\r\n})\r\n  .then(res => res.json())\r\n  .then((result) => {\r\n    console.log(result);\r\n  }); */\n\n//# sourceURL=webpack://mesto/./src/pages/index.js?");
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "UserInfo": () => (/* binding */ UserInfo)
+/* harmony export */ });
+class UserInfo {
+  constructor({
+    userLoginSelector,
+    userActivitySelector,
+    userAvatarSelector
+  }) {
+    this._userLogin = document.querySelector(userLoginSelector);
+    this._userActivity = document.querySelector(userActivitySelector);
+    this._avatarLink = document.querySelector(userAvatarSelector);
+    this._userId = null;
+  }
+  getUserInfo() {
+    return {
+      userLogin: this._userLogin.textContent,
+      userActivity: this._userActivity.textContent
+    };
+  }
+  setUserInfo({
+    userLogin,
+    userActivity,
+    userId,
+    avatarLink
+  }) {
+    this._userLogin.textContent = userLogin;
+    this._userActivity.textContent = userActivity;
+    this._avatarLink.src = avatarLink;
+    this._userId = userId;
+  }
+  updataAvatarInfo(avatarLink) {
+    this._avatarLink.src = avatarLink;
+  }
+  transferUserId() {
+    return this._userId;
+  }
+}
 
 /***/ }),
 
@@ -116,7 +508,56 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _com
   \********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"cardForm\": () => (/* binding */ cardForm),\n/* harmony export */   \"cardsContainer\": () => (/* binding */ cardsContainer),\n/* harmony export */   \"formsConfig\": () => (/* binding */ formsConfig),\n/* harmony export */   \"initialCards\": () => (/* binding */ initialCards),\n/* harmony export */   \"inputTitle\": () => (/* binding */ inputTitle),\n/* harmony export */   \"jobInput\": () => (/* binding */ jobInput),\n/* harmony export */   \"nameInput\": () => (/* binding */ nameInput),\n/* harmony export */   \"popupBtnOpenAddCard\": () => (/* binding */ popupBtnOpenAddCard),\n/* harmony export */   \"popupBtnOpenProfile\": () => (/* binding */ popupBtnOpenProfile),\n/* harmony export */   \"profileForm\": () => (/* binding */ profileForm)\n/* harmony export */ });\nconst initialCards = [{\n  name: 'Архыз',\n  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'\n}, {\n  name: 'Челябинская область',\n  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'\n}, {\n  name: 'Иваново',\n  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'\n}, {\n  name: 'Камчатка',\n  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'\n}, {\n  name: 'Холмогорский район',\n  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'\n}, {\n  name: 'Байкал',\n  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'\n}];\nconst formsConfig = {\n  formSelector: '.popup__form',\n  inputSelector: '.popup__input',\n  submitButtonSelector: '.popup__save',\n  inputErrorClass: 'popup__input_type_error'\n};\nconst popupBtnOpenProfile = document.querySelector(\".profile__edit\");\nconst popupBtnOpenAddCard = document.querySelector(\".profile__add\");\nconst profileForm = document.querySelector(\".popup__form_profile\");\nconst cardForm = document.querySelector(\".popup__form_add-cards\");\nconst nameInput = document.querySelector(\".popup__input_type_name\");\nconst jobInput = document.querySelector(\".popup__input_type_data\");\nconst cardsContainer = '.elements__list';\nconst inputTitle = document.querySelector('.popup__input_type_title');\n\n//# sourceURL=webpack://mesto/./src/utils/constants.js?");
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "avatarForm": () => (/* binding */ avatarForm),
+/* harmony export */   "cardForm": () => (/* binding */ cardForm),
+/* harmony export */   "cardsContainer": () => (/* binding */ cardsContainer),
+/* harmony export */   "formsConfig": () => (/* binding */ formsConfig),
+/* harmony export */   "initialCards": () => (/* binding */ initialCards),
+/* harmony export */   "inputTitle": () => (/* binding */ inputTitle),
+/* harmony export */   "jobInput": () => (/* binding */ jobInput),
+/* harmony export */   "nameInput": () => (/* binding */ nameInput),
+/* harmony export */   "popupBtnOpenAddCard": () => (/* binding */ popupBtnOpenAddCard),
+/* harmony export */   "popupBtnOpenProfile": () => (/* binding */ popupBtnOpenProfile),
+/* harmony export */   "popupBtnOpenUpdataAvatar": () => (/* binding */ popupBtnOpenUpdataAvatar),
+/* harmony export */   "profileForm": () => (/* binding */ profileForm)
+/* harmony export */ });
+const initialCards = [{
+  name: 'Архыз',
+  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+}, {
+  name: 'Челябинская область',
+  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+}, {
+  name: 'Иваново',
+  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+}, {
+  name: 'Камчатка',
+  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+}, {
+  name: 'Холмогорский район',
+  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+}, {
+  name: 'Байкал',
+  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+}];
+const formsConfig = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__save',
+  inputErrorClass: 'popup__input_type_error'
+};
+const popupBtnOpenProfile = document.querySelector(".profile__edit");
+const popupBtnOpenAddCard = document.querySelector(".profile__add");
+const popupBtnOpenUpdataAvatar = document.querySelector(".profile__button-edit");
+const profileForm = document.querySelector(".popup__form_profile");
+const avatarForm = document.querySelector(".popup__form_avatar-updata");
+const cardForm = document.querySelector(".popup__form_add-cards");
+const nameInput = document.querySelector(".popup__input_type_name");
+const jobInput = document.querySelector(".popup__input_type_data");
+const cardsContainer = '.elements__list';
+const inputTitle = document.querySelector('.popup__input_type_title');
 
 /***/ }),
 
@@ -126,7 +567,9 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \*****************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n\n\n//# sourceURL=webpack://mesto/./src/pages/index.css?");
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
 
 /***/ })
 
@@ -186,11 +629,165 @@ eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extr
 /******/ 	})();
 /******/ 	
 /************************************************************************/
-/******/ 	
-/******/ 	// startup
-/******/ 	// Load entry module and return exports
-/******/ 	// This entry module can't be inlined because the eval devtool is used.
-/******/ 	var __webpack_exports__ = __webpack_require__("./src/pages/index.js");
-/******/ 	
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+(() => {
+/*!****************************!*\
+  !*** ./src/pages/index.js ***!
+  \****************************/
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _components_Card_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/Card.js */ "./src/components/Card.js");
+/* harmony import */ var _components_FormValidator_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/FormValidator.js */ "./src/components/FormValidator.js");
+/* harmony import */ var _components_Section_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Section.js */ "./src/components/Section.js");
+/* harmony import */ var _components_PopupWithForm_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/PopupWithForm.js */ "./src/components/PopupWithForm.js");
+/* harmony import */ var _components_PopupWithImage_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/PopupWithImage.js */ "./src/components/PopupWithImage.js");
+/* harmony import */ var _components_UserInfo_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/UserInfo.js */ "./src/components/UserInfo.js");
+/* harmony import */ var _components_Api_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/Api.js */ "./src/components/Api.js");
+/* harmony import */ var _components_PopupDeleteCard_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/PopupDeleteCard.js */ "./src/components/PopupDeleteCard.js");
+/* harmony import */ var _utils_constants_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../utils/constants.js */ "./src/utils/constants.js");
+/* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./index.css */ "./src/pages/index.css");
+
+
+
+
+
+
+
+
+
+
+let defaultCardList = [];
+const api = new _components_Api_js__WEBPACK_IMPORTED_MODULE_6__.Api({
+  url: 'https://mesto.nomoreparties.co/v1/cohort-63',
+  headers: {
+    'content-type': 'application/json',
+    Authorization: 'dac2ff7d-9ecf-480c-a9f0-aeb4dc4991bc'
+  }
+});
+const cards = api.getAllCards();
+cards.then(data => {
+  defaultCardList = new _components_Section_js__WEBPACK_IMPORTED_MODULE_2__.Section({
+    items: data,
+    renderer: item => {
+      defaultCardList.appendCard(createCard(item));
+    }
+  }, _utils_constants_js__WEBPACK_IMPORTED_MODULE_8__.cardsContainer);
+  defaultCardList.renderItems();
+}).catch(err => alert(err));
+const dataUser = api.loadDataUser();
+dataUser.then(data => {
+  userInfo.setUserInfo({
+    userLogin: data.name,
+    userActivity: data.about,
+    avatarLink: data.avatar,
+    userId: data._id
+  });
+}).catch(err => alert(err));
+const profileFormValidator = new _components_FormValidator_js__WEBPACK_IMPORTED_MODULE_1__.FormValidator(_utils_constants_js__WEBPACK_IMPORTED_MODULE_8__.formsConfig, _utils_constants_js__WEBPACK_IMPORTED_MODULE_8__.profileForm);
+profileFormValidator.enableValidation();
+const cardFormValidator = new _components_FormValidator_js__WEBPACK_IMPORTED_MODULE_1__.FormValidator(_utils_constants_js__WEBPACK_IMPORTED_MODULE_8__.formsConfig, _utils_constants_js__WEBPACK_IMPORTED_MODULE_8__.cardForm);
+cardFormValidator.enableValidation();
+const avatarFormValidator = new _components_FormValidator_js__WEBPACK_IMPORTED_MODULE_1__.FormValidator(_utils_constants_js__WEBPACK_IMPORTED_MODULE_8__.formsConfig, _utils_constants_js__WEBPACK_IMPORTED_MODULE_8__.avatarForm);
+avatarFormValidator.enableValidation();
+const popupWithImage = new _components_PopupWithImage_js__WEBPACK_IMPORTED_MODULE_4__.PopupWithImage('.popup_open-img');
+popupWithImage.setEventListeners();
+const popupDeleteCard = new _components_PopupDeleteCard_js__WEBPACK_IMPORTED_MODULE_7__.PopupDeleteCard('.popup_delete-cards', {
+  handleSubmitForm: data => {
+    api.deleteCard(popupDeleteCard.transferCardId(data).id).then(() => {
+      popupDeleteCard.transferCardId().remove();
+      popupDeleteCard.close();
+    }).catch(err => alert(err));
+  }
+});
+function createCard(item) {
+  const userId = userInfo.transferUserId();
+  const card = new _components_Card_js__WEBPACK_IMPORTED_MODULE_0__.Card(item, '.card_sample_place', {
+    openImg: data => {
+      popupWithImage.open(data.name, data.link);
+    },
+    openDeleteCard: data => {
+      popupDeleteCard.openPopupDeleteCard(data);
+      popupDeleteCard.setEventListeners();
+    },
+    addLike: cardId => {
+      api.addLikes(cardId).then(res => {
+        card.toggleLikeUser(res.likes);
+      }).catch(err => alert(err));
+    },
+    deleteLike: cardId => {
+      api.deleteLikes(cardId).then(res => {
+        card.toggleLikeUser(res.likes);
+      }).catch(err => alert(err));
+    }
+  }, userId);
+  const cardElemdent = card.generateCard();
+  return cardElemdent;
+}
+const popupCardForm = new _components_PopupWithForm_js__WEBPACK_IMPORTED_MODULE_3__.PopupWithForm({
+  selectorPopup: '.popup_add-cards',
+  handleSubmitForm: inputData => {
+    const buttonSubmitAddCard = _utils_constants_js__WEBPACK_IMPORTED_MODULE_8__.cardForm.querySelector(_utils_constants_js__WEBPACK_IMPORTED_MODULE_8__.formsConfig.submitButtonSelector);
+    buttonSubmitAddCard.textContent = 'Сохранение...';
+    api.addCard(inputData).then(res => {
+      defaultCardList.addItem(createCard(res));
+      popupCardForm.close();
+    }).catch(err => alert(err)).finally(() => buttonSubmitAddCard.textContent = 'Создать');
+  }
+});
+popupCardForm.setEventListeners();
+function openProfilePopup() {
+  popupProfileForm.open();
+  const dataUser = userInfo.getUserInfo();
+  _utils_constants_js__WEBPACK_IMPORTED_MODULE_8__.nameInput.value = dataUser.userLogin;
+  _utils_constants_js__WEBPACK_IMPORTED_MODULE_8__.jobInput.value = dataUser.userActivity;
+}
+function openCardForm() {
+  popupCardForm.open();
+  cardFormValidator.disableButton();
+}
+function OpenUpdataAvatar() {
+  popupAvatarForm.open();
+  avatarFormValidator.disableButton();
+}
+const popupProfileForm = new _components_PopupWithForm_js__WEBPACK_IMPORTED_MODULE_3__.PopupWithForm({
+  selectorPopup: '.popup_edit-profile',
+  handleSubmitForm: inputData => {
+    const buttonSubmitAddProfile = _utils_constants_js__WEBPACK_IMPORTED_MODULE_8__.profileForm.querySelector(_utils_constants_js__WEBPACK_IMPORTED_MODULE_8__.formsConfig.submitButtonSelector);
+    buttonSubmitAddProfile.textContent = 'Сохранение...';
+    api.editProfile(inputData).then(res => {
+      userInfo.setUserInfo({
+        userLogin: res.name,
+        userActivity: res.about,
+        avatarLink: res.avatar
+      });
+      popupProfileForm.close();
+    }).catch(err => alert(err)).finally(() => buttonSubmitAddProfile.textContent = 'Сохранить');
+  }
+});
+popupProfileForm.setEventListeners();
+const popupAvatarForm = new _components_PopupWithForm_js__WEBPACK_IMPORTED_MODULE_3__.PopupWithForm({
+  selectorPopup: '.popup_updata-avatar',
+  handleSubmitForm: data => {
+    const buttonSubmitUpdataAvatar = _utils_constants_js__WEBPACK_IMPORTED_MODULE_8__.avatarForm.querySelector(_utils_constants_js__WEBPACK_IMPORTED_MODULE_8__.formsConfig.submitButtonSelector);
+    buttonSubmitUpdataAvatar.textContent = 'Сохранение...';
+    api.updataAvatar(data.avatar).then(res => {
+      console.log(res.avatar, 'res');
+      userInfo.updataAvatarInfo(res.avatar);
+      popupAvatarForm.close();
+    }).catch(err => alert(err)).finally(() => buttonSubmitUpdataAvatar.textContent = 'Сохранить');
+  }
+});
+popupAvatarForm.setEventListeners();
+const userInfo = new _components_UserInfo_js__WEBPACK_IMPORTED_MODULE_5__.UserInfo({
+  userLoginSelector: '.profile__login',
+  userActivitySelector: '.profile__activity',
+  userAvatarSelector: '.profile__avatar'
+});
+_utils_constants_js__WEBPACK_IMPORTED_MODULE_8__.popupBtnOpenProfile.addEventListener("click", () => openProfilePopup());
+_utils_constants_js__WEBPACK_IMPORTED_MODULE_8__.popupBtnOpenAddCard.addEventListener("click", () => openCardForm());
+_utils_constants_js__WEBPACK_IMPORTED_MODULE_8__.popupBtnOpenUpdataAvatar.addEventListener("click", () => OpenUpdataAvatar());
+})();
+
 /******/ })()
 ;
+//# sourceMappingURL=main.js.map

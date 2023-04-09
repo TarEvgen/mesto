@@ -33,7 +33,7 @@
 /*!*************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/postcss-loader/dist/cjs.js!./src/blocks/profile/__avatar/profile__avatar.css ***!
   \*************************************************************************************************************************************************************************/
-.profile__avatar{border-radius:50%;height:120px;-o-object-fit:cover;object-fit:cover;width:120px}@media screen and (max-width:620px){.profile__avatar{justify-self:center}}
+.profile__avatar{border-radius:50%;height:120px;-o-object-fit:cover;object-fit:cover;width:120px}
 /*!*********************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/postcss-loader/dist/cjs.js!./src/blocks/profile/__edit/profile__edit.css ***!
   \*********************************************************************************************************************************************************************/
@@ -162,7 +162,13 @@
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/postcss-loader/dist/cjs.js!./src/blocks/element/__delete/_active/element__delete_active.css ***!
   \****************************************************************************************************************************************************************************************/
 .element__delete_active{visibility:visible}
+/*!***********************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/postcss-loader/dist/cjs.js!./src/blocks/profile/__button-edit/profile__button-edit.css ***!
+  \***********************************************************************************************************************************************************************************/
+.profile__button-edit{border:0;border-radius:50%;cursor:pointer;height:120px;margin:0;padding:0;position:relative;width:120px}.profile__button-edit:before{background-color:rgba(0,0,0,.8);background-image:url(a086f758840ae814ecde.svg);background-position:50%;background-repeat:no-repeat;bottom:0;content:"";left:0;opacity:0;position:absolute;right:0;top:0;transition:opacity 1s}.profile__button-edit:hover:before{opacity:1}@media screen and (max-width:620px){.profile__button-edit{justify-self:center}}
 /*!*********************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/postcss-loader/dist/cjs.js!./src/pages/index.css ***!
   \*********************************************************************************************************************************************/
 
+
+/*# sourceMappingURL=main.css.map*/
