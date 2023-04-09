@@ -7,11 +7,10 @@ import { UserInfo } from '../components/UserInfo.js'
 import { Api } from '../components/Api.js'
 import { PopupDeleteCard } from '../components/PopupDeleteCard.js'
 
-
 import {  formsConfig, 
          popupBtnOpenProfile, popupBtnOpenAddCard,
-         profileForm, cardForm, nameInput, 
-         jobInput, cardsContainer, inputTitle, 
+         profileForm, cardForm, avatarForm, nameInput, 
+         jobInput, cardsContainer, popupBtnOpenUpdataAvatar, 
         } from '../utils/constants.js'
 
 import "./index.css";
@@ -52,6 +51,8 @@ const profileFormValidator = new FormValidator(formsConfig, profileForm);
 profileFormValidator.enableValidation();
 const cardFormValidator = new FormValidator(formsConfig, cardForm);
 cardFormValidator.enableValidation();
+const avatarFormValidator = new FormValidator(formsConfig, avatarForm);
+avatarFormValidator.enableValidation();
 
 const popupWithImage = new PopupWithImage ('.popup_open-img');
 popupWithImage.setEventListeners ();
@@ -70,12 +71,13 @@ function createCard (item) {
   const card = new Card(item, '.card_sample_place', { openImg:  (data) => {
     popupWithImage.open(data.name, data.link);
   }, openDeleteCard: (data)=>{popupDeleteCard.openPopupDeleteCard(data);
-    popupDeleteCard.setEventListeners ();}, addLike: (cardId) =>{api.addLikes(cardId)
+      popupDeleteCard.setEventListeners ();}, 
+    addLike: (cardId) =>{api.addLikes(cardId)
       .then(res =>{
         card.toggleLikeUser (res.likes)
       })
       .catch((err) => alert(err))}, 
-      deleteLike: (cardId) => {api.deleteLikes(cardId)
+    deleteLike: (cardId) => {api.deleteLikes(cardId)
       .then(res =>{
         card.toggleLikeUser (res.likes)
       })
@@ -102,7 +104,7 @@ const popupCardForm = new PopupWithForm ({selectorPopup: '.popup_add-cards',
 
 popupCardForm.setEventListeners();
 
-function openProfilePopup(selectorPopup) { 
+function openProfilePopup() { 
   popupProfileForm.open();
   const dataUser = userInfo.getUserInfo ();
   nameInput.value = dataUser.userLogin;
@@ -114,6 +116,11 @@ function openCardForm() {
   cardFormValidator.disableButton();
 }
 
+function OpenUpdataAvatar() {
+  popupAvatarForm.open()
+  avatarFormValidator.disableButton();
+}
+
 const popupProfileForm = new PopupWithForm ({selectorPopup: '.popup_edit-profile',
   handleSubmitForm: (inputData) => {
   const buttonSubmitAddProfile = profileForm.querySelector(formsConfig.submitButtonSelector)
@@ -122,7 +129,8 @@ const popupProfileForm = new PopupWithForm ({selectorPopup: '.popup_edit-profile
     .then(res =>{
       userInfo.setUserInfo ({
         userLogin: res.name,
-        userActivity: res.about,   
+        userActivity: res.about,
+        avatarLink: res.avatar
       })
       popupProfileForm.close()
     })
@@ -132,9 +140,26 @@ const popupProfileForm = new PopupWithForm ({selectorPopup: '.popup_edit-profile
 
 popupProfileForm.setEventListeners()
 
+const popupAvatarForm = new PopupWithForm ({selectorPopup: '.popup_updata-avatar',
+ handleSubmitForm: (data) => {
+  const buttonSubmitUpdataAvatar = avatarForm.querySelector(formsConfig.submitButtonSelector)
+  buttonSubmitUpdataAvatar.textContent ='Сохранение...'
+    api.updataAvatar(data.avatar)
+    .then(res =>{
+      console.log(res.avatar, 'res')
+      userInfo.updataAvatarInfo (res.avatar)
+     popupAvatarForm.close()
+   })
+    .catch((err) => alert(err))
+    .finally(()=> buttonSubmitUpdataAvatar.textContent ='Сохранить')
+}});
+
+popupAvatarForm.setEventListeners()
+
 const userInfo = new UserInfo ({userLoginSelector: '.profile__login', 
   userActivitySelector: '.profile__activity', userAvatarSelector: '.profile__avatar'
 });
 
 popupBtnOpenProfile.addEventListener("click", () => openProfilePopup());
 popupBtnOpenAddCard.addEventListener("click", () => openCardForm());
+popupBtnOpenUpdataAvatar.addEventListener("click", () => OpenUpdataAvatar());

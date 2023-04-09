@@ -34,9 +34,13 @@ export const initialCards = [
 
   export const popupBtnOpenProfile = document.querySelector(".profile__edit");
   export const popupBtnOpenAddCard = document.querySelector(".profile__add");
+  export const popupBtnOpenUpdataAvatar = document.querySelector(".profile__button-edit");
   export const profileForm = document.querySelector(".popup__form_profile");
+  export const avatarForm = document.querySelector(".popup__form_avatar-updata");
+  
   export const cardForm = document.querySelector(".popup__form_add-cards");
   export const nameInput = document.querySelector(".popup__input_type_name");
   export const jobInput = document.querySelector(".popup__input_type_data"); 
   export const cardsContainer = '.elements__list'; 
   export const inputTitle = document.querySelector('.popup__input_type_title');
+  

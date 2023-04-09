@@ -1,58 +1,54 @@
 export class Api {
-    constructor(config) {
-        this._url = config.url;
-        this._headers =config.headers;
-    }
-
-
-    getAllCards() {
-      return fetch(`${this._url}/cards`, {
-        method: 'GET',
-        headers: this._headers
+  constructor(config) {
+    this._url = config.url;
+    this._headers =config.headers;
+  }
+  
+  getAllCards() {
+    return fetch(`${this._url}/cards`, {
+      method: 'GET',
+      headers: this._headers
     })
-    .then((res) =>{
-      // console.log(res.json());
-      if (res.ok) {
-        return res.json();}
-        return Promise.reject('Произошла ошибка')
-        
+    .then((res) => {
+      return this._checkRes (res)
     })
-}
+  }
 
   loadDataUser () {
-
     return fetch(`${this._url}/users/me`, {
       method: 'GET',
       headers: this._headers
-  })
-  .then((res) =>{
-    // console.log(res.json());
-    if (res.ok) {
-      return res.json();}
-      return Promise.reject('Произошла ошибка')
-      
-  })
-
+    })
+    .then((res) => {
+    return this._checkRes (res)
+    })
   }
 
   editProfile (inputData) {
     return fetch(`${this._url}/users/me`, {
-
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
         name: inputData.user,
         about: inputData.activity
       })
-
     })
-    .then((res) =>{
-      // console.log(res.json());
-      if (res.ok) {
-        return res.json();}
-        return Promise.reject('Произошла ошибка')
-      })
+    .then((res) => {
+      return this._checkRes (res)
+    })
+  }
 
+  updataAvatar (inputData) {
+    return fetch(`${this._url}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: inputData
+      })
+    })
+    .then((res) => {
+      return this._checkRes (res)
+    })
   }
 
   addCard (data) {
@@ -61,69 +57,46 @@ export class Api {
       headers: this._headers,
       body: JSON.stringify({name: data.title, link: data.link})
     })
-    .then((res) =>{
-      // console.log(data);
-      if (res.ok) {
-        return res.json();}
-        return Promise.reject('Произошла ошибка')
-      })
+    .then((res) => {
+      return this._checkRes (res)
+    })
   }
  
   deleteCard (cardId) {
-    console.log(cardId, 'cardId')
-    console.log(`${this._url}/cards/${cardId}`, 'cardId')
     return fetch(`${this._url}/cards/${cardId}`,{
       method: 'DELETE',
       headers: this._headers
     })
-    .then((res) =>{
-      // console.log(data);
-      if (res.ok) {
-        return res.json();}
-        return Promise.reject('Произошла ошибка')
-      })
+    .then((res) => {
+      return this._checkRes (res)
+    })
   }
-
 
   addLikes (cardId) {
-
     return fetch(`${this._url}/cards/${cardId}/likes`,{
-
       method: 'PUT',
       headers: this._headers
-
     })
-    .then((res) =>{
-      // console.log(data);
-      if (res.ok) {
-        return res.json();}
-        return Promise.reject('Произошла ошибка')
-      })
-
+    .then((res) => {
+      return this._checkRes (res)
+    })
   }
-
 
   deleteLikes (cardId) {
-
     return fetch(`${this._url}/cards/${cardId}/likes`,{
-
       method: 'DELETE',
       headers: this._headers
-
     })
-    .then((res) =>{
-      console.log('сработал метод удалени лайка');
-      if (res.ok) {
-        return res.json();}
-        return Promise.reject('Произошла ошибка')
-      })
-
+    .then((res) => {
+      return this._checkRes (res)
+    })
   }
   
-
-
-
-
+  _checkRes (res) {
+    if (res.ok) {
+      return res.json();}
+      return Promise.reject('Произошла ошибка')
+  }
 }
 
 

@@ -11,21 +11,18 @@ export class UserInfo {
     return { userLogin: this._userLogin.textContent,  userActivity: this._userActivity.textContent };   
   }
   
-  setUserInfo ({userLogin, userActivity, avatarLink, userId}) {
+  setUserInfo ({userLogin, userActivity, userId, avatarLink}) {
     this._userLogin.textContent = userLogin;
     this._userActivity.textContent = userActivity;
-    //this._avatarLink.src = avatarLink;
+    this._avatarLink.src = avatarLink
     this._userId = userId
-    
-   // console.log(userId, 'userId')
+  }
+
+  updataAvatarInfo (avatarLink) {
+    this._avatarLink.src = avatarLink
   }
 
   transferUserId () {
     return this._userId;
   }
-
-
-
-
-
 }
