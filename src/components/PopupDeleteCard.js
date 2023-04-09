@@ -10,18 +10,17 @@ export class PopupDeleteCard extends Popup {
 
   openPopupDeleteCard(card) {
     super.open();
-    console.log(card, 'card')
+    
     this._card = card
  
   }
 
   setEventListeners() {
     super.setEventListeners()
-   // console.log('навешиваем слушатель на кнопку')
-    //console.log(this._form, 'this._form')
+  
     this._form.addEventListener('submit', (evt) => {
       evt.preventDefault();
-      console.log('нажал да')
+      
       this._handleSubmitForm()
       //this.close();
     });

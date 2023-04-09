@@ -4,9 +4,10 @@
   border-radius: 50%;
   object-fit: cover;
 }
-
+/*
 @media screen and (max-width: 620px) {
   .profile__avatar {
     justify-self: center;
   }
 }
+*/
