@@ -1,123 +1,93 @@
 export class Api {
   constructor(config) {
     this._url = config.url;
-    this._headers =config.headers;
+    this._headers = config.headers;
   }
-  
+
   getAllCards() {
     return fetch(`${this._url}/cards`, {
-      method: 'GET',
-      headers: this._headers
-    })
-    .then((res) => {
-      return this._checkRes (res)
-    })
+      method: "GET",
+      headers: this._headers,
+    }).then((res) => {
+      return this._checkRes(res);
+    });
   }
 
-  loadDataUser () {
+  loadDataUser() {
     return fetch(`${this._url}/users/me`, {
-      method: 'GET',
-      headers: this._headers
-    })
-    .then((res) => {
-    return this._checkRes (res)
-    })
+      method: "GET",
+      headers: this._headers,
+    }).then((res) => {
+      return this._checkRes(res);
+    });
   }
 
-  editProfile (inputData) {
+  editProfile(inputData) {
     return fetch(`${this._url}/users/me`, {
-      method: 'PATCH',
+      method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
         name: inputData.user,
-        about: inputData.activity
-      })
-    })
-    .then((res) => {
-      return this._checkRes (res)
-    })
+        about: inputData.activity,
+      }),
+    }).then((res) => {
+      return this._checkRes(res);
+    });
   }
 
-  updataAvatar (inputData) {
+  updataAvatar(inputData) {
     return fetch(`${this._url}/users/me/avatar`, {
-      method: 'PATCH',
+      method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        avatar: inputData
-      })
-    })
-    .then((res) => {
-      return this._checkRes (res)
-    })
+        avatar: inputData,
+      }),
+    }).then((res) => {
+      return this._checkRes(res);
+    });
   }
 
-  addCard (data) {
+  addCard(data) {
     return fetch(`${this._url}/cards`, {
-      method: 'POST',
+      method: "POST",
       headers: this._headers,
-      body: JSON.stringify({name: data.title, link: data.link})
-    })
-    .then((res) => {
-      return this._checkRes (res)
-    })
-  }
- 
-  deleteCard (cardId) {
-    return fetch(`${this._url}/cards/${cardId}`,{
-      method: 'DELETE',
-      headers: this._headers
-    })
-    .then((res) => {
-      return this._checkRes (res)
-    })
+      body: JSON.stringify({ name: data.title, link: data.link }),
+    }).then((res) => {
+      return this._checkRes(res);
+    });
   }
 
-  addLikes (cardId) {
-    return fetch(`${this._url}/cards/${cardId}/likes`,{
-      method: 'PUT',
-      headers: this._headers
-    })
-    .then((res) => {
-      return this._checkRes (res)
-    })
+  deleteCard(cardId) {
+    return fetch(`${this._url}/cards/${cardId}`, {
+      method: "DELETE",
+      headers: this._headers,
+    }).then((res) => {
+      return this._checkRes(res);
+    });
   }
 
-  deleteLikes (cardId) {
-    return fetch(`${this._url}/cards/${cardId}/likes`,{
-      method: 'DELETE',
-      headers: this._headers
-    })
-    .then((res) => {
-      return this._checkRes (res)
-    })
+  addLikes(cardId) {
+    return fetch(`${this._url}/cards/${cardId}/likes`, {
+      method: "PUT",
+      headers: this._headers,
+    }).then((res) => {
+      return this._checkRes(res);
+    });
   }
-  
-  _checkRes (res) {
+
+  deleteLikes(cardId) {
+    return fetch(`${this._url}/cards/${cardId}/likes`, {
+      method: "DELETE",
+      headers: this._headers,
+    }).then((res) => {
+      return this._checkRes(res);
+    });
+  }
+
+  _checkRes(res) {
     if (res.ok) {
-      return res.json();}
-      return Promise.reject('Произошла ошибка')
+      return res.json();
+    }
+    return Promise.reject("Произошла ошибка");
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*fetch('https://mesto.nomoreparties.co/v1/cohort-63/cards', {
-  headers: {
-    authorization: 'dac2ff7d-9ecf-480c-a9f0-aeb4dc4991bc'
-  }
-})
-  .then(res => res.json())
-  .then((result) => {
-    console.log(result);
-  }); */
