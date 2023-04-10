@@ -117,8 +117,7 @@ class Card {
     openImg,
     openDeleteCard,
     addLike,
-    deleteLike,
-    deleteButton
+    deleteLike
   }, userId) {
     this._name = cardData.name;
     this._link = cardData.link;
@@ -130,7 +129,6 @@ class Card {
     this._openImg = openImg;
     this._deleteCard = openDeleteCard;
     this._element = this._getTemplate();
-    this._deleteButton = deleteButton;
     this._imageElement = this._element.querySelector(".element__img");
     this._elementButtonLike = this._element.querySelector(".element__like-button");
     this._elementDeleteCard = this._element.querySelector(".element__delete");
