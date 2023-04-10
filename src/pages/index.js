@@ -55,30 +55,6 @@ Promise.all([api.getAllCards(), api.loadDataUser()])
     cardsSection.renderItems();
   })
   .catch((err) => alert(err));
-/*
-const cards = api.getAllCards()
-cards
-.then((data) => { cardsSection = new Section({
-  items: data, 
-  renderer: (item) => { cardsSection.appendElement (createCard (item))}},
-  selectorContainer
-  );
-  cardsSection.renderItems();
-})
-.catch((err) => alert(err))
-
-const dataUser = api.loadDataUser();
-dataUser
-.then((data) => {
-    userInfo.setUserInfo ({
-      userLogin: data.name,
-      userActivity: data.about, 
-      avatarLink: data.avatar,
-      userId: data._id 
-      })
-   })
-.catch((err) => alert(err))
-*/
 
 const profileFormValidator = new FormValidator(formsConfig, profileForm);
 profileFormValidator.enableValidation();
@@ -96,13 +72,13 @@ const popupDeleteCard = new PopupDeleteCard(".popup_delete-cards", {
       .deleteCard(popupDeleteCard.getCardId(data).id)
       .then(() => {
         popupDeleteCard.getCardId().remove();
-        //card.remove()
         popupDeleteCard.close();
       })
       .catch((err) => alert(err));
   },
 });
 popupDeleteCard.setEventListeners();
+
 function createCard(cardData) {
   const userId = userInfo.getCardId();
   const card = new Card(
