@@ -177,7 +177,7 @@ class Card {
     });
   }
   _openPopupDeleteCard() {
-    this._deleteCard(this._element);
+    this._deleteCard(this);
   }
   updateLikes(likes) {
     this._likes = likes;
@@ -196,6 +196,12 @@ class Card {
     } else {
       this._elementButtonLike.classList.remove("element__button_active");
     }
+  }
+  removeCard() {
+    this._element.remove();
+  }
+  getId() {
+    return this._cardId;
   }
 }
 
@@ -335,7 +341,7 @@ class PopupDeleteCard extends _components_Popup_js__WEBPACK_IMPORTED_MODULE_0__.
       this._handleSubmitForm();
     });
   }
-  getCardId() {
+  getCard() {
     return this._card;
   }
 }
@@ -486,7 +492,7 @@ class UserInfo {
   updataAvatarInfo(avatarLink) {
     this._avatarLink.src = avatarLink;
   }
-  getCardId() {
+  getUserId() {
     return this._userId;
   }
 }
@@ -685,16 +691,16 @@ avatarFormValidator.enableValidation();
 const popupWithImage = new _components_PopupWithImage_js__WEBPACK_IMPORTED_MODULE_4__.PopupWithImage(".popup_open-img");
 popupWithImage.setEventListeners();
 const popupDeleteCard = new _components_PopupDeleteCard_js__WEBPACK_IMPORTED_MODULE_7__.PopupDeleteCard(".popup_delete-cards", {
-  handleSubmitForm: data => {
-    api.deleteCard(popupDeleteCard.getCardId(data).id).then(() => {
-      popupDeleteCard.getCardId().remove();
+  handleSubmitForm: () => {
+    api.deleteCard(popupDeleteCard.getCard().getId()).then(() => {
+      popupDeleteCard.getCard().removeCard();
       popupDeleteCard.close();
     }).catch(err => alert(err));
   }
 });
 popupDeleteCard.setEventListeners();
 function createCard(cardData) {
-  const userId = userInfo.getCardId();
+  const userId = userInfo.getUserId();
   const card = new _components_Card_js__WEBPACK_IMPORTED_MODULE_0__.Card(cardData, ".card_sample_place", {
     openImg: data => {
       popupWithImage.open(data.name, data.link);
