@@ -25,7 +25,7 @@ export class UserInfo {
     this._avatarLink.src = avatarLink;
   }
 
-  getCardId() {
+  getUserId() {
     return this._userId;
   }
 }

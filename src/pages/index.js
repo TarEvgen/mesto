@@ -67,11 +67,11 @@ const popupWithImage = new PopupWithImage(".popup_open-img");
 popupWithImage.setEventListeners();
 
 const popupDeleteCard = new PopupDeleteCard(".popup_delete-cards", {
-  handleSubmitForm: (data) => {
+  handleSubmitForm: () => {
     api
-      .deleteCard(popupDeleteCard.getCardId(data).id)
+      .deleteCard(popupDeleteCard.getCard().getId())
       .then(() => {
-        popupDeleteCard.getCardId().remove();
+        popupDeleteCard.getCard().removeCard();
         popupDeleteCard.close();
       })
       .catch((err) => alert(err));
@@ -80,7 +80,7 @@ const popupDeleteCard = new PopupDeleteCard(".popup_delete-cards", {
 popupDeleteCard.setEventListeners();
 
 function createCard(cardData) {
-  const userId = userInfo.getCardId();
+  const userId = userInfo.getUserId();
   const card = new Card(
     cardData,
     ".card_sample_place",

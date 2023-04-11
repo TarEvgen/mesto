@@ -20,7 +20,7 @@ export class PopupDeleteCard extends Popup {
     });
   }
 
-  getCardId() {
+  getCard() {
     return this._card;
   }
 }

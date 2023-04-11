@@ -2,7 +2,7 @@ export class Card {
   constructor(
     cardData,
     templateSelector,
-    { openImg, openDeleteCard, addLike, deleteLike},
+    { openImg, openDeleteCard, addLike, deleteLike },
     userId
   ) {
     this._name = cardData.name;
@@ -15,7 +15,7 @@ export class Card {
     this._openImg = openImg;
     this._deleteCard = openDeleteCard;
     this._element = this._getTemplate();
-    
+
     this._imageElement = this._element.querySelector(".element__img");
     this._elementButtonLike = this._element.querySelector(
       ".element__like-button"
@@ -74,7 +74,7 @@ export class Card {
   }
 
   _openPopupDeleteCard() {
-    this._deleteCard(this._element);
+    this._deleteCard(this);
   }
 
   updateLikes(likes) {
@@ -97,5 +97,13 @@ export class Card {
     } else {
       this._elementButtonLike.classList.remove("element__button_active");
     }
+  }
+
+  removeCard() {
+    this._element.remove();
+  }
+
+  getId() {
+    return this._cardId;
   }
 }
